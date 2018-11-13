@@ -1,4 +1,4 @@
-library loading;
+library loadingdialog;
 
 import 'package:core_app/pop/full_screen_dialog.dart';
 import 'package:flutter/material.dart';

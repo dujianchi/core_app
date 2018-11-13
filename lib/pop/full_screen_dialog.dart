@@ -1,4 +1,4 @@
-library app;
+library fulldialog;
 
 import 'package:flutter/material.dart';
 

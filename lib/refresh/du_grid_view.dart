@@ -1,4 +1,4 @@
-library core_app;
+library dugrid;
 
 import 'package:flutter/material.dart';
 import 'package:core_app/refresh/du_listeners.dart';
