@@ -82,7 +82,7 @@ abstract class BaseStatefulWidget extends StatefulWidget {
   String getString(String key) => Texts().getString(stringMaps(), key);
 
   /// 当前页面中需要用到的字符串
-  Map<String, Map<String, String>> stringMaps() => {};
+  Map<String, Map<String, String>> stringMaps() => const {};
 }
 
 abstract class BaseStatelessWidget extends StatelessWidget {
@@ -91,7 +91,7 @@ abstract class BaseStatelessWidget extends StatelessWidget {
   String getString(String key) => Texts().getString(stringMaps(), key);
 
   /// 当前页面中需要用到的字符串
-  Map<String, Map<String, String>> stringMaps() => {};
+  Map<String, Map<String, String>> stringMaps() => const {};
 }
 
 class Texts {
