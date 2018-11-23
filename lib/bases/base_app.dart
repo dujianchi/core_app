@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
 
+/// base MaterialApp
 class BaseMaterialApp extends MaterialApp {
   ///
   /// 需要支持的语言编码和国家编码
@@ -76,6 +77,7 @@ class BaseMaterialApp extends MaterialApp {
   Iterable<Locale> get supportedLocales => _supportedLocales;
 }
 
+/// base StatefulWidget
 abstract class BaseStatefulWidget extends StatefulWidget {
   String getContextString(BuildContext context, String key) =>
       Texts().getWithContext(context, stringMaps(), key);
@@ -83,8 +85,18 @@ abstract class BaseStatefulWidget extends StatefulWidget {
 
   /// 当前页面中需要用到的字符串
   Map<String, Map<String, String>> stringMaps() => const {};
+
+  ///屏幕适配方案工具
+  Dimens _dimens;
+
+  ///得到屏幕适配方案工具
+  Dimens px(BuildContext context) {
+    if (_dimens == null) _dimens = Dimens(MediaQuery.of(context).size.width);
+    return _dimens;
+  }
 }
 
+/// base StatelessWidget
 abstract class BaseStatelessWidget extends StatelessWidget {
   String getContextString(BuildContext context, String key) =>
       Texts().getWithContext(context, stringMaps(), key);
@@ -92,11 +104,21 @@ abstract class BaseStatelessWidget extends StatelessWidget {
 
   /// 当前页面中需要用到的字符串
   Map<String, Map<String, String>> stringMaps() => const {};
+
+  ///屏幕适配方案工具
+  Dimens _dimens;
+
+  ///得到屏幕适配方案工具
+  Dimens px(BuildContext context) {
+    if (_dimens == null) _dimens = Dimens(MediaQuery.of(context).size.width);
+    return _dimens;
+  }
 }
 
+/// init and setup 'en' and 'zh'
 class Texts {
   static const String _default_language = 'zh';
-  static const _support_language = ['en', _default_language];
+  static const _support_language = [_default_language, 'en'];
 
   Texts._internal();
 
@@ -141,6 +163,7 @@ class Texts {
   }
 }
 
+/// support 'zh-CN' and 'en-US'
 class TextsDelegate extends LocalizationsDelegate<Texts> {
   const TextsDelegate();
 
@@ -157,4 +180,12 @@ class TextsDelegate extends LocalizationsDelegate<Texts> {
 
   @override
   bool shouldReload(TextsDelegate old) => (old != this);
+}
+
+/// 等比缩放的屏幕适配方案
+class Dimens {
+  final double screenSize;
+  Dimens(this.screenSize);
+  double of(double px, int width) => screenSize * px / width;
+  int ofInt(double px, int width) => of(px, width).round();
 }
