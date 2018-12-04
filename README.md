@@ -8,4 +8,4 @@ For help getting started with Flutter, view our online [documentation](https://f
 
 For help on editing package code, view the [documentation](https://flutter.io/developing-packages/).
 
-[generate json](docs/index.html)
+[generate json](https://dujianchi.github.io/core_app/index.html)
