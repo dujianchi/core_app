@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <title>Json to Dart class</title>
   <meta charset="UTF-8">
   <!-- import CSS -->
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -9,9 +10,19 @@
 
 <body>
   <div id="app">
-    <el-input type="textarea" :autosize="{ minRows: 4, maxRows: 7}" placeholder="请输入json" v-model="json"></el-input>
-    <el-button @click="revertJson">转换</el-button>
-    <el-input type="textarea" :autosize="{ minRows: 7, maxRows: 9}" placeholder="结果" v-model="result"></el-input>
+    <el-row :gutter="10" :type="flex">
+      <el-col :span="12">
+        <el-input type="textarea" :rows="15" placeholder="请输入json" v-model="json"></el-input>
+      </el-col>
+      <el-col :span="12">
+        <el-input type="textarea" :rows="15" placeholder="结果" v-model="result"></el-input>
+      </el-col>
+    </el-row>
+    <el-row :align="middle" :gutter="10">
+      <el-col :span="24">
+        <el-button @click="revertJson">转换</el-button>
+      </el-col>
+    </el-row>
   </div>
 </body>
 <!-- import Vue before Element -->
