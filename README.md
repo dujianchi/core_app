@@ -9,3 +9,9 @@ For help getting started with Flutter, view our online [documentation](https://f
 For help on editing package code, view the [documentation](https://flutter.io/developing-packages/).
 
 [generate json](https://dujianchi.github.io/core_app/index.html)
+
+# useage
+dependencies:
+    core_app:
+        git:
+        url: https://github.com/dujianchi/core_app.git
