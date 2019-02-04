@@ -158,8 +158,8 @@ class Texts {
       texts = strings[_default_language];
 
     return (texts == null || texts[key] == null)
-        ? ''
-        : texts[key]; //若是取到了map，但没取到对应的key，将返回空字符串
+        ? '$key'//'$key is not exists'
+        : texts[key]; //若是取到了map，但没取到对应的key，将返回key
   }
 }
 
