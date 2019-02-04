@@ -7,12 +7,11 @@ import 'package:flutter/foundation.dart' show SynchronousFuture;
 
 /// base MaterialApp
 class BaseMaterialApp extends MaterialApp {
-  ///
-  /// 需要支持的语言编码和国家编码
-  ///
-  static const _supportedLocales = const [
-    const Locale('en', 'US'),
-    const Locale('zh', 'CN'),
+
+  static const _localizationsDelegates = const [
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    TextsDelegate.delegate,
   ];
 
   BaseMaterialApp({
@@ -30,9 +29,10 @@ class BaseMaterialApp extends MaterialApp {
     color,
     theme,
     locale,
-    localizationsDelegates,
+    localizationsDelegates: _localizationsDelegates,
+    localeListResolutionCallback,
     localeResolutionCallback,
-    supportedLocales: _supportedLocales,
+    supportedLocales: Texts.support_locales,
     debugShowMaterialGrid: false,
     showPerformanceOverlay: false,
     checkerboardRasterCacheImages: false,
@@ -55,6 +55,7 @@ class BaseMaterialApp extends MaterialApp {
             theme: theme,
             locale: locale,
             localizationsDelegates: localizationsDelegates,
+            localeListResolutionCallback: localeListResolutionCallback,
             localeResolutionCallback: localeResolutionCallback,
             supportedLocales: supportedLocales,
             debugShowMaterialGrid: debugShowMaterialGrid,
@@ -63,22 +64,12 @@ class BaseMaterialApp extends MaterialApp {
             checkerboardOffscreenLayers: checkerboardOffscreenLayers,
             showSemanticsDebugger: showSemanticsDebugger,
             debugShowCheckedModeBanner: debugShowCheckedModeBanner);
-
-  @override
-  Iterable<LocalizationsDelegate> get localizationsDelegates {
-    return const [
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-      TextsDelegate.delegate,
-    ];
-  }
-
-  @override
-  Iterable<Locale> get supportedLocales => _supportedLocales;
 }
 
 /// base StatefulWidget
 abstract class BaseStatefulWidget extends StatefulWidget {
+  const BaseStatefulWidget({Key key}) : super(key: key);
+
   String getContextString(BuildContext context, String key) =>
       Texts().getWithContext(context, stringMaps(), key);
   String getString(String key) => Texts().getString(stringMaps(), key);
@@ -87,17 +78,20 @@ abstract class BaseStatefulWidget extends StatefulWidget {
   Map<String, Map<String, String>> stringMaps() => const {};
 
   ///屏幕适配方案工具
-  Dimens _dimens;
+  final _dimens = const <Dimens>[null];
 
   ///得到屏幕适配方案工具
   Dimens px(BuildContext context) {
-    if (_dimens == null) _dimens = Dimens(MediaQuery.of(context).size.width);
-    return _dimens;
+    if (_dimens[0] == null)
+      _dimens[0] = Dimens(MediaQuery.of(context).size.width);
+    return _dimens[0];
   }
 }
 
 /// base StatelessWidget
 abstract class BaseStatelessWidget extends StatelessWidget {
+  const BaseStatelessWidget({Key key}) : super(key: key);
+
   String getContextString(BuildContext context, String key) =>
       Texts().getWithContext(context, stringMaps(), key);
   String getString(String key) => Texts().getString(stringMaps(), key);
@@ -106,19 +100,20 @@ abstract class BaseStatelessWidget extends StatelessWidget {
   Map<String, Map<String, String>> stringMaps() => const {};
 
   ///屏幕适配方案工具
-  Dimens _dimens;
+  final _dimens = const <Dimens>[null];
 
   ///得到屏幕适配方案工具
   Dimens px(BuildContext context) {
-    if (_dimens == null) _dimens = Dimens(MediaQuery.of(context).size.width);
-    return _dimens;
+    if (_dimens[0] == null)
+      _dimens[0] = Dimens(MediaQuery.of(context).size.width);
+    return _dimens[0];
   }
 }
 
 /// init and setup 'en' and 'zh'
 class Texts {
-  static const String _default_language = 'zh';
-  static const _support_language = [_default_language, 'en'];
+  static const support_language = const ['en', 'zh'];
+  static const support_locales = const [const Locale('en'), const Locale('zh')];
 
   Texts._internal();
 
@@ -126,13 +121,13 @@ class Texts {
 
   factory Texts() => _instance;
 
-  String languageCode = _default_language;
+  String languageCode = support_language[0];
 
   Texts initLanguageContext(BuildContext context) {
     if (context != null)
       languageCode =
           Localizations.localeOf(context, nullOk: true)?.languageCode;
-    if (languageCode == null) languageCode = _default_language;
+    if (languageCode == null) languageCode = support_language[0];
     return this;
   }
 
@@ -155,23 +150,25 @@ class Texts {
   String getString(Map<String, Map<String, String>> strings, String key) {
     var texts = strings[languageCode];
     if (texts == null || texts.length == 0) //若是取不到这个map，或者取到了map但值为空，则取默认的map
-      texts = strings[_default_language];
+      texts = strings[support_language[0]];
 
     return (texts == null || texts[key] == null)
-        ? '$key'//'$key is not exists'
+        ? '$key' //'$key is not exists'
         : texts[key]; //若是取到了map，但没取到对应的key，将返回key
   }
 }
 
 /// support 'zh-CN' and 'en-US'
 class TextsDelegate extends LocalizationsDelegate<Texts> {
-  const TextsDelegate();
+  const TextsDelegate._internal();
 
-  static const TextsDelegate delegate = const TextsDelegate();
+  static const TextsDelegate delegate = const TextsDelegate._internal();
+
+  factory TextsDelegate() => delegate;
 
   @override
   bool isSupported(Locale locale) =>
-      Texts._support_language.contains(locale.languageCode);
+      Texts.support_language.contains(locale.languageCode);
 
   @override
   Future<Texts> load(Locale locale) {
