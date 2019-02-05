@@ -1,6 +1,9 @@
 library core_app;
 
 export 'bases/base_app.dart';
+export 'bases/dimens.dart';
+export 'bases/texts.dart';
+export 'bases/texts_delegate.dart';
 
 export 'pop/du_dialog_route.dart';
 export 'pop/flushbar.dart';
