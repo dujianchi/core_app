@@ -433,7 +433,7 @@ class _FlushbarState<K extends Object> extends State<Flushbar>
       widget.progressIndicatorController.removeListener(_progressListener);
       widget.progressIndicatorController.dispose();
     }
-    focusNode.detach();
+    focusNode.dispose();
     super.dispose();
   }
 
