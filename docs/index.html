@@ -34,6 +34,7 @@
   function toJson(name, jsonStr) {
     var json = eval('(' + jsonStr + ')');
     var explain = '///\t' + jsonStr + '\n';
+    var toString = '\n\n\t@override\n\tString toString() {\n\t\treturn \'{'
     var field = '';
     var constructor_none = '\t' + name + '({';
     var constructor_json = '\t' + name + '.fromJson(dynamic json) {\n\t\t';
@@ -42,8 +43,10 @@
       if (first) {
         constructor_json += 'if (json != null && json is Map) {\n';
         constructor_none += 'this.' + key;
+        toString += key + ': $' + key;
       } else {
         constructor_none += ', this.' + key;
+        toString += ', ' + key + ': $' + key;
       }
 
       first = false;
@@ -70,7 +73,8 @@
 
       explain += '///\t' + key + ' = ' + json[key] + '\n';
     }
-    return explain + 'class ' + name + ' {\n' + field + '\n' + constructor_none + '});\n\n' + constructor_json + '\t\t}\n\t}\n}';
+    toString += '}\';\n\t}'
+    return explain + 'class ' + name + ' {\n' + field + '\n' + constructor_none + '});\n\n' + constructor_json + '\t\t}\n\t}' + toString + '\n}';
   };
 
   new Vue({
