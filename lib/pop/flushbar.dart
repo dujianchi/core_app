@@ -1,6 +1,6 @@
 library flushbar; //修改自flushbar 0.8.3
 
-import 'package:core_app/pop/du_dialog_route.dart';
+import 'du_dialog_route.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 

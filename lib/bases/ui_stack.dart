@@ -8,6 +8,10 @@ class UiStack extends NavigatorObserver {
 
   static List<Route> get routes => _routes;
 
+  static void add(Widget widget) {
+    _routes.add(MaterialPageRoute(builder: (context) => widget));
+  }
+
   static bool closeTopDialog(BuildContext context) {
     bool result = false;
     if (_routes.isNotEmpty) {

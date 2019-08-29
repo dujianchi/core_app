@@ -1,6 +1,6 @@
 library baseapp;
 
-import 'dimens.dart';
+import 'ui_stack.dart';
 import 'texts.dart';
 import 'texts_delegate.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 /// base MaterialApp
 class BaseMaterialApp extends MaterialApp {
-
   static const _localizationsDelegates = const <LocalizationsDelegate>[
     TextsDelegate.delegate,
     GlobalMaterialLocalizations.delegate,
@@ -78,14 +77,10 @@ abstract class BaseStatefulWidget extends StatefulWidget {
   /// 当前页面中需要用到的字符串
   Map<String, Map<String, String>> stringMaps() => const {};
 
-  ///屏幕适配方案工具
-  final _dimens = const <Dimens>[null];
-
-  ///得到屏幕适配方案工具
-  Dimens px(BuildContext context) {
-    if (_dimens[0] == null)
-      _dimens[0] = Dimens(MediaQuery.of(context).size.width);
-    return _dimens[0];
+  @override
+  StatefulElement createElement() {
+    UiStack.add(this);
+    return super.createElement();
   }
 }
 
@@ -100,13 +95,9 @@ abstract class BaseStatelessWidget extends StatelessWidget {
   /// 当前页面中需要用到的字符串
   Map<String, Map<String, String>> stringMaps() => const {};
 
-  ///屏幕适配方案工具
-  final _dimens = const <Dimens>[null];
-
-  ///得到屏幕适配方案工具
-  Dimens px(BuildContext context) {
-    if (_dimens[0] == null)
-      _dimens[0] = Dimens(MediaQuery.of(context).size.width);
-    return _dimens[0];
+  @override
+  StatelessElement createElement() {
+    UiStack.add(this);
+    return super.createElement();
   }
 }
