@@ -7,7 +7,7 @@ class UiStack extends NavigatorObserver {
 
   static final List<Route> _routes = List();
   static List<Route> get routes => _routes;
-  static NavigatorState nav() => _instance.navigator;
+  static NavigatorState get nav => _instance.navigator;
 
   static void add(Widget widget) {
     _routes.add(MaterialPageRoute(builder: (context) => widget));
