@@ -14,10 +14,14 @@ class Dimens {
   static set designWidth(double designWidth) =>
       _instance._designWidth = designWidth;
 
+  static double of(double px) => _instance._of(px);
+
+  static int ofInt(double px) => _instance._ofInt(px);
+
   double _screenSize, _designWidth;
 
-  double of(double px) =>
+  double _of(double px) =>
       _designWidth == 0 ? px / 2 : _screenSize * px / _designWidth;
 
-  int ofInt(double px) => of(px).round();
+  int _ofInt(double px) => _of(px).round();
 }
