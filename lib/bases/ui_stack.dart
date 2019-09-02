@@ -25,36 +25,36 @@ class UiStack extends NavigatorObserver {
           result = true;
         }
       }
-      return result;
     }
+    return result;
+  }
 
-    @override
-    void didPop(Route route, Route previousRoute) {
-      print('route = $route, previousRoute = $previousRoute');
-      _routes.remove(route);
-    }
+  @override
+  void didPop(Route route, Route previousRoute) {
+    print('route = $route, previousRoute = $previousRoute');
+    _routes.remove(route);
+  }
 
-    @override
-    void didPush(Route route, Route previousRoute) {
-      print('route = $route, previousRoute = $previousRoute');
-      _routes.add(route);
-    }
+  @override
+  void didPush(Route route, Route previousRoute) {
+    print('route = $route, previousRoute = $previousRoute');
+    _routes.add(route);
+  }
 
-    @override
-    void didRemove(Route route, Route previousRoute) {
-      print('route = $route, previousRoute = $previousRoute');
-      _routes.remove(route);
-    }
+  @override
+  void didRemove(Route route, Route previousRoute) {
+    print('route = $route, previousRoute = $previousRoute');
+    _routes.remove(route);
+  }
 
-    @override
-    void didReplace({Route newRoute, Route oldRoute}) {
-      print('newRoute = $newRoute, oldRoute = $oldRoute');
-      final start = _routes.indexOf(oldRoute);
-      if (start >= 0) {
-        _routes.replaceRange(start, start + 1, [newRoute]);
-      } else {
-        _routes.add(newRoute);
-      }
+  @override
+  void didReplace({Route newRoute, Route oldRoute}) {
+    print('newRoute = $newRoute, oldRoute = $oldRoute');
+    final start = _routes.indexOf(oldRoute);
+    if (start >= 0) {
+      _routes.replaceRange(start, start + 1, [newRoute]);
+    } else {
+      _routes.add(newRoute);
     }
   }
 }
