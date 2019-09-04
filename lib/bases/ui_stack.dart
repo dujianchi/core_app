@@ -16,13 +16,16 @@ class UiStack extends NavigatorObserver {
   static bool closeTopDialog(BuildContext context) {
     bool result = false;
     if (_routes.isNotEmpty) {
-      var route = _routes.last;
-      var entrite = route.overlayEntries;
-      if (entrite.isNotEmpty) {
-        var entry = entrite.first;
-        if (!entry.opaque) {
-          Navigator.of(context).maybePop();
-          result = true;
+      for (var index = _routes.length - 1; index >= 0; index--) {
+        var route = _routes[index];
+        var entrite = route.overlayEntries;
+        if (entrite.isNotEmpty) {
+          var entry = entrite.first;
+          if (!entry.opaque) {
+            Navigator.of(context).maybePop();
+            result = true;
+            break;
+          }
         }
       }
     }
