@@ -45,6 +45,7 @@ class U6 extends NavigatorObserver {
       } catch (e) {
         print('$e');
       }
+      _routes.remove(route);
     }
   }
 
