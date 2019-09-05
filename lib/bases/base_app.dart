@@ -1,6 +1,5 @@
 library baseapp;
 
-import 'ui_stack.dart';
 import 'texts.dart';
 import 'texts_delegate.dart';
 import 'package:flutter/material.dart';
@@ -77,11 +76,6 @@ abstract class BaseStatefulWidget extends StatefulWidget {
   /// 当前页面中需要用到的字符串
   Map<String, Map<String, String>> stringMaps() => const {};
 
-  @override
-  StatefulElement createElement() {
-    UiStack.add(this);
-    return super.createElement();
-  }
 }
 
 /// base StatelessWidget
@@ -95,9 +89,4 @@ abstract class BaseStatelessWidget extends StatelessWidget {
   /// 当前页面中需要用到的字符串
   Map<String, Map<String, String>> stringMaps() => const {};
 
-  @override
-  StatelessElement createElement() {
-    UiStack.add(this);
-    return super.createElement();
-  }
 }
