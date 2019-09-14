@@ -33,7 +33,7 @@
 <script>
   function toJson(name, jsonStr) {
     var json = eval('(' + jsonStr + ')');
-    var explain = '///\t' + jsonStr + '\n';
+    var explain = '///\t' + jsonStr.replace(/\n/g, "\n///") + '\n';
     var toString = '\n\n\t@override\n\tString toString() {\n\t\treturn \'{'
     var field = '';
     var constructor_none = '\t' + name + '({';
