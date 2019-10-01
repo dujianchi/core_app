@@ -51,30 +51,34 @@ class U6 extends NavigatorObserver {
 
   @override
   void didPop(Route route, Route previousRoute) {
-    print('didPop -> route = $route, previousRoute = $previousRoute');
+    print('didPop start -> route.length = ${_routes.length}');
     _routes.remove(route);
+    print('didPop done  -> route.length = ${_routes.length}');
   }
 
   @override
   void didPush(Route route, Route previousRoute) {
-    print('didPush -> route = $route, previousRoute = $previousRoute');
+    print('didPush start -> route.length = ${_routes.length}');
     _routes.add(route);
+    print('didPush done  -> route.length = ${_routes.length}');
   }
 
   @override
   void didRemove(Route route, Route previousRoute) {
-    print('didRemove -> route = $route, previousRoute = $previousRoute');
+    print('didRemove start -> route.length = ${_routes.length}');
     _routes.remove(route);
+    print('didRemove done  -> route.length = ${_routes.length}');
   }
 
   @override
   void didReplace({Route newRoute, Route oldRoute}) {
-    print('didReplace -> newRoute = $newRoute, oldRoute = $oldRoute');
+    print('didReplace start -> route.length = ${_routes.length}');
     final start = _routes.indexOf(oldRoute);
     if (start >= 0) {
       _routes.replaceRange(start, start + 1, [newRoute]);
     } else {
       _routes.add(newRoute);
     }
+    print('didReplace done  -> route.length = ${_routes.length}');
   }
 }
