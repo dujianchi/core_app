@@ -91,6 +91,9 @@
       var third = str.substring(index+2)
       str = first+second+third;
     }
+    if (str.indexOf('_') >=0) {
+      str = formatName(str);
+    }
     return str;
   };
 
