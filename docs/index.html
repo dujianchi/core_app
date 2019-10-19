@@ -40,41 +40,58 @@
     var constructor_json = '\t' + name + '.fromJson(dynamic json) {\n\t\t';
     var first = true;
     for (var key in json) {
+      var keyName = formatName(key);
       if (first) {
         constructor_json += 'if (json != null && json is Map) {\n';
-        constructor_none += 'this.' + key;
-        toString += key + ': $' + key;
+        constructor_none += 'this.' + keyName;
+        toString += keyName + ': $' + keyName;
       } else {
-        constructor_none += ', this.' + key;
-        toString += ', ' + key + ': $' + key;
+        constructor_none += ', this.' + keyName;
+        toString += ', ' + keyName + ': $' + keyName;
       }
 
       first = false;
 
       if (json[key] instanceof Array) {
         var childName = key.charAt(0).toUpperCase() + key.substr(1, key.length - 1);
-        field += '\tList<' + childName + '> ' + key + ';\n';
+        childName = formatName(childName);
+        field += '\tList<' + childName + '> ' + keyName + ';\n';
         var list = json[key];
         var obj = list[0];
         var childObj = toJson(childName, JSON.stringify(obj));
         explain = childObj + '\n\n' + explain;
-        constructor_json += '\t\t\tvar list = json[\'' + key + '\'];\n\t\t\tif(list != null && list is List){\n\t\t\t\t' + key + ' = List<' + childName + '>();\n\t\t\t\tfor (var obj in list) {\n\t\t\t\t\t' + key + '.add('
+        constructor_json += '\t\t\tvar list = json[\'' + key + '\'];\n\t\t\tif(list != null && list is List){\n\t\t\t\t' + keyName + ' = List<' + childName 
+        + '>();\n\t\t\t\tfor (var obj in list) {\n\t\t\t\t\t' + keyName + '.add('
           + childName + '.fromJson(obj));\n\t\t\t\t}\n\t\t\t}\n';
       } else if (json[key] instanceof Object) {
         var childName = key.charAt(0).toUpperCase() + key.substr(1, key.length - 1);
-        field += '\t' + childName + ' ' + key + ';\n';
+        field += '\t' + childName + ' ' + keyName + ';\n';
         var childObj = toJson(childName, JSON.stringify(json[key]));
         explain = childObj + '\n\n' + explain;
-        constructor_json += '\t\t\t' + key + ' = ' + childName + '.fromJson(json[\'' + key + '\']);\n';
+        constructor_json += '\t\t\t' + keyName + ' = ' + childName + '.fromJson(json[\'' + key + '\']);\n';
       } else {
-        field += '\tString ' + key + ';\n';
-        constructor_json += '\t\t\t' + key + ' = \'${json[\'' + key + '\']}\';\n';
+        field += '\tString ' + keyName + ';\n';
+        constructor_json += '\t\t\t' + keyName + ' = \'${json[\'' + key + '\']}\';\n';
       }
 
-      explain += '///\t' + key + ' = ' + json[key] + '\n';
+      explain += '///\t' + keyName + ' = ' + json[key] + '\n';
     }
     toString += '}\';\n\t}'
     return explain + 'class ' + name + ' {\n' + field + '\n' + constructor_none + '});\n\n' + constructor_json + '\t\t}\n\t}' + toString + '\n}';
+  };
+
+  function formatName(string){
+    var str = new String(string);
+    var index = str.indexOf('_');
+    if (index == 0) {
+      str = str.substring(1);
+    } else if(index > 0){
+      var first = str.substring(0, index);
+      var second = str.charAt(index+1).toUpperCase();
+      var third = str.substring(index+2)
+      str = first+second+third;
+    }
+    return str;
   };
 
   new Vue({
