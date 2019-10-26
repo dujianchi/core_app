@@ -71,7 +71,7 @@
         constructor_json += '\t\t\t' + keyName + ' = ' + childName + '.fromJson(json[\'' + key + '\']);\n';
       } else {
         field += '\tString ' + keyName + ';\n';
-        constructor_json += '\t\t\t' + keyName + ' = \'${json[\'' + key + '\']}\';\n';
+        constructor_json += '\t\t\t' + keyName + ' = \'${json[\'' + key + '\'] ?? \'\'}\';\n';
       }
 
       explain += '///\t' + keyName + ' = ' + json[key] + '\n';
