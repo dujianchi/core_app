@@ -5,7 +5,7 @@ export 'bases/dimens.dart';
 export 'bases/texts.dart';
 export 'bases/texts_delegate.dart';
 export 'bases/u6.dart';
-export 'bases/str.dart';
+export 'bases/st_util.dart';
 
 export 'pop/du_dialog_route.dart';
 export 'pop/flushbar.dart';

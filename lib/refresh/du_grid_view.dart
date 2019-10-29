@@ -89,7 +89,7 @@ class DuGridView extends StatelessWidget {
         itemBuilder: itemBuilder,
       );
     } else {
-      child = emptyView;
+      child = SingleChildScrollView(child: emptyView);
     }
     if (onRefresh != null && refreshEnable) {
       child = RefreshIndicator(

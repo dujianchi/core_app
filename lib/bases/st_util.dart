@@ -1,4 +1,4 @@
-class Str {
+class StUtil {
   /// string -> num
   static num toNum(String str, [num def]) {
     if (str?.isNotEmpty == true) {
