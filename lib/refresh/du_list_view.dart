@@ -44,7 +44,7 @@ class DuListView extends StatelessWidget {
   }
 
   bool _onNotification(ScrollNotification notification) {
-    if (notification is ScrollEndNotification) {
+    if (notification is ScrollEndNotification && loadmoreEnable == true) {
       if (_controller.position.maxScrollExtent > 0 &&
           _controller.position.maxScrollExtent == _controller.offset) {
         onLoadmore();
@@ -98,7 +98,7 @@ class DuListView extends StatelessWidget {
         onRefresh: onRefresh,
       );
     }
-    if (onLoadmore != null && loadmoreEnable) {
+    if (onLoadmore != null) {
       child = NotificationListener(
         child: child,
         onNotification: _onNotification,
