@@ -6,6 +6,7 @@ import 'package:core_app/refresh/du_listeners.dart';
 /// 带刷新和下拉的scrollview
 class DuScrollView extends StatelessWidget {
   final Widget child;
+  final Widget emptyView;
   final RefreshCallback onRefresh;
   final OnLoadmore onLoadmore;
   final ScrollController _controller = ScrollController();
@@ -19,6 +20,7 @@ class DuScrollView extends StatelessWidget {
 
   DuScrollView({
     this.child,
+    this.emptyView,
     this.onRefresh,
     this.onLoadmore,
     this.loadmoreEnable = true,
@@ -48,7 +50,7 @@ class DuScrollView extends StatelessWidget {
       padding: padding,
       physics: const AlwaysScrollableScrollPhysics(),
       controller: _controller,
-      child: child,
+      child: (emptyView == null || child != null) ? child : emptyView,
     );
     if (onRefresh != null && refreshEnable) {
       widget = RefreshIndicator(

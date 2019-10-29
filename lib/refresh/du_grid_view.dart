@@ -13,6 +13,7 @@ class DuGridView extends StatelessWidget {
   final ScrollController _controller = ScrollController();
   final loadmoreEnable;
   final refreshEnable;
+  final Widget emptyView;
   // gridview的属性
   final Axis scrollDirection;
   final bool reverse;
@@ -31,6 +32,7 @@ class DuGridView extends StatelessWidget {
     this.onLoadmore,
     this.loadmoreEnable = true,
     this.refreshEnable = true,
+    this.emptyView,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
     this.primary,
@@ -71,7 +73,7 @@ class DuGridView extends StatelessWidget {
         controller: _controller,
         children: children,
       );
-    } else {
+    } else if (itemCount != null && itemCount > 0 || emptyView == null) {
       child = GridView.builder(
         scrollDirection: scrollDirection,
         reverse: reverse,
@@ -86,6 +88,8 @@ class DuGridView extends StatelessWidget {
         itemCount: itemCount,
         itemBuilder: itemBuilder,
       );
+    } else {
+      child = emptyView;
     }
     if (onRefresh != null && refreshEnable) {
       child = RefreshIndicator(

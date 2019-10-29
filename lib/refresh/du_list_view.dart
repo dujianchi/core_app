@@ -13,6 +13,7 @@ class DuListView extends StatelessWidget {
   final ScrollController _controller = ScrollController();
   final loadmoreEnable;
   final refreshEnable;
+  final Widget emptyView;
 // listview的属性
   final Axis scrollDirection;
   final bool reverse;
@@ -30,6 +31,7 @@ class DuListView extends StatelessWidget {
     this.onLoadmore,
     this.loadmoreEnable = true,
     this.refreshEnable = true,
+    this.emptyView,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
     this.primary,
@@ -67,7 +69,7 @@ class DuListView extends StatelessWidget {
         controller: _controller,
         children: children,
       );
-    } else {
+    } else if (itemCount != null && itemCount > 0 || emptyView == null) {
       child = ListView.builder(
         scrollDirection: scrollDirection,
         reverse: reverse,
@@ -78,9 +80,11 @@ class DuListView extends StatelessWidget {
         addRepaintBoundaries: addRepaintBoundaries,
         physics: const AlwaysScrollableScrollPhysics(),
         controller: _controller,
-        itemCount: itemCount,
+        itemCount: itemCount ?? 0,
         itemBuilder: itemBuilder,
       );
+    } else {
+      child = emptyView;
     }
     if (onRefresh != null && refreshEnable) {
       child = RefreshIndicator(
