@@ -50,7 +50,15 @@ class DuScrollView extends StatelessWidget {
       padding: padding,
       physics: const AlwaysScrollableScrollPhysics(),
       controller: _controller,
-      child: (emptyView == null || child != null) ? child : emptyView,
+      child: (emptyView == null || child != null)
+          ? child
+          : onRefresh != null
+              ? InkWell(
+                  child: emptyView,
+                  onTap: () {
+                    onRefresh();
+                  })
+              : emptyView,
     );
     if (onRefresh != null && refreshEnable) {
       widget = RefreshIndicator(

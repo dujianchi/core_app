@@ -84,7 +84,13 @@ class DuListView extends StatelessWidget {
         itemBuilder: itemBuilder,
       );
     } else {
-      child = SingleChildScrollView(child: emptyView);
+      child = onRefresh != null
+          ? InkWell(
+              child: emptyView,
+              onTap: () {
+                onRefresh();
+              })
+          : emptyView;
     }
     if (onRefresh != null && refreshEnable) {
       child = RefreshIndicator(
