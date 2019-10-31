@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 
 /// 等比缩放的屏幕适配方案
@@ -9,8 +11,10 @@ class Dimens {
 
   static Dimens get instance => _instance;
 
-  static set screenSize(BuildContext context) =>
-      _instance._screenSize = MediaQuery.of(context).size.width;
+  static set screenSize(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    _instance._screenSize = min(size.width, size.height);
+  }
 
   static set designWidth(double designWidth) =>
       _instance._designWidth = designWidth ?? _default_design_width;
