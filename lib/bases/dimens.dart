@@ -11,9 +11,12 @@ class Dimens {
 
   static Dimens get instance => _instance;
 
+  static get padding => _instance._padding;
+
   static set screenSize(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    _instance._screenSize = min(size.width, size.height);
+    final MediaQueryData data = MediaQuery.of(context);
+    _instance._screenSize = min(data.size.width, data.size.height);
+    _instance._padding = MediaQuery.of(context).padding;
   }
 
   static set designWidth(double designWidth) =>
@@ -30,6 +33,8 @@ class Dimens {
 
   double _screenSize = _default_screen_size,
       _designWidth = _default_design_width;
+
+  EdgeInsets _padding = EdgeInsets.zero;
 
   // final Map<num, Map<num, num>> caches = {};
   // double _of(num px) {
