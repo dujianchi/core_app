@@ -11,7 +11,7 @@ class Dimens {
 
   static Dimens get instance => _instance;
 
-  static get padding => _instance._padding;
+  static EdgeInsets get padding => _instance._padding;
 
   static set screenSize(BuildContext context) {
     final MediaQueryData data = MediaQuery.of(context);
