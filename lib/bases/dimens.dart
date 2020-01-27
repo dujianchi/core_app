@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 /// 等比缩放的屏幕适配方案
 class Dimens {
-  static const _default_screen_size = 360.0, _default_design_width = 720.0;
+  static const default_screen_size = 360.0, default_design_width = 720.0;
   static final Dimens _instance = Dimens._internal();
   Dimens._internal();
   factory Dimens() => _instance;
@@ -20,7 +20,7 @@ class Dimens {
   }
 
   static set designWidth(double designWidth) =>
-      _instance._designWidth = designWidth ?? _default_design_width;
+      _instance._designWidth = designWidth ?? default_design_width;
 
   static void init(BuildContext context, double designWidth) {
     Dimens.screenSize = context;
@@ -31,8 +31,8 @@ class Dimens {
 
   static int ofInt(num px) => _instance._ofInt(px);
 
-  double _screenSize = _default_screen_size,
-      _designWidth = _default_design_width;
+  double _screenSize = default_screen_size,
+      _designWidth = default_design_width;
 
   EdgeInsets _padding = EdgeInsets.zero;
 
