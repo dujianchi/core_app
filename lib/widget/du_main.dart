@@ -45,29 +45,38 @@ class DuMain extends DuStatelessWidget {
     this.drawerEdgeDragWidth,
   });
 
+  double designWidth() => 720.0;
+
+  Widget buildHome(BuildContext context) {
+    Dimens.init(context, designWidth());
+    return Scaffold(
+      appBar: appBar,
+      body: body,
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: floatingActionButtonLocation,
+      floatingActionButtonAnimator: floatingActionButtonAnimator,
+      persistentFooterButtons: persistentFooterButtons,
+      drawer: drawer,
+      endDrawer: endDrawer,
+      bottomNavigationBar: bottomNavigationBar,
+      bottomSheet: bottomSheet,
+      backgroundColor: backgroundColor,
+      resizeToAvoidBottomPadding: resizeToAvoidBottomPadding,
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+      primary: primary,
+      drawerDragStartBehavior: drawerDragStartBehavior,
+      extendBody: extendBody,
+      extendBodyBehindAppBar: extendBodyBehindAppBar,
+      drawerScrimColor: drawerScrimColor,
+      drawerEdgeDragWidth: drawerEdgeDragWidth,
+    );
+  }
+
   @override
   Widget build(BuildContext context) => BaseMaterialApp(
         navigatorObservers: [U6()],
-        home: Scaffold(
-          appBar: appBar,
-          body: body,
-          floatingActionButton: floatingActionButton,
-          floatingActionButtonLocation: floatingActionButtonLocation,
-          floatingActionButtonAnimator: floatingActionButtonAnimator,
-          persistentFooterButtons: persistentFooterButtons,
-          drawer: drawer,
-          endDrawer: endDrawer,
-          bottomNavigationBar: bottomNavigationBar,
-          bottomSheet: bottomSheet,
-          backgroundColor: backgroundColor,
-          resizeToAvoidBottomPadding: resizeToAvoidBottomPadding,
-          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-          primary: primary,
-          drawerDragStartBehavior: drawerDragStartBehavior,
-          extendBody: extendBody,
-          extendBodyBehindAppBar: extendBodyBehindAppBar,
-          drawerScrimColor: drawerScrimColor,
-          drawerEdgeDragWidth: drawerEdgeDragWidth,
+        home: Builder(
+          builder: (context) => buildHome(context),
         ),
       );
 }
