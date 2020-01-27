@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class DuMain extends DuStatelessWidget {
+  final double designWidth;
   final PreferredSizeWidget appBar;
   final Widget body;
   final Widget floatingActionButton;
@@ -24,6 +25,7 @@ class DuMain extends DuStatelessWidget {
   final double drawerEdgeDragWidth;
 
   DuMain({
+    this.designWidth,
     this.appBar,
     this.body,
     this.floatingActionButton,
@@ -45,10 +47,8 @@ class DuMain extends DuStatelessWidget {
     this.drawerEdgeDragWidth,
   });
 
-  double designWidth() => 720.0;
-
   Widget buildHome(BuildContext context) {
-    Dimens.init(context, designWidth());
+    Dimens.init(context, designWidth);
     return Scaffold(
       appBar: appBar,
       body: body,
