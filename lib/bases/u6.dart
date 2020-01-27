@@ -24,7 +24,7 @@ class U6 extends NavigatorObserver {
             try {
               nav.maybePop();
             } catch (e) {
-              print('$e');
+              //print('$e');
             }
             result = true;
             break;
@@ -43,42 +43,64 @@ class U6 extends NavigatorObserver {
       try {
         nav.maybePop();
       } catch (e) {
-        print('$e');
+        //print('$e');
       }
       _routes.remove(route);
     }
   }
 
+  /// push
+  static Future<T> push<T extends Object>({
+    Route<T> route,
+    Widget next,
+    RouteSettings settings,
+    bool maintainState = true,
+    bool fullscreenDialog = false,
+  }) {
+    Route<T> need;
+    if (route != null) {
+      need = route;
+    } else if (next != null) {
+      need = MaterialPageRoute<T>(
+        builder: (context) => next,
+        settings: settings,
+        maintainState: maintainState,
+        fullscreenDialog: fullscreenDialog,
+      );
+    }
+    return need != null ? nav.push(need) : null;
+  }
+
   @override
   void didPop(Route route, Route previousRoute) {
-    print('didPop start -> route.length = ${_routes.length}');
+    //print('didPop start -> route.length = ${_routes.length}');
     _routes.remove(route);
-    print('didPop done  -> route.length = ${_routes.length}');
+    //print('didPop done  -> route.length = ${_routes.length}');
   }
 
   @override
   void didPush(Route route, Route previousRoute) {
-    print('didPush start -> route.length = ${_routes.length}');
+    //print('didPush start -> route.length = ${_routes.length}');
     _routes.add(route);
-    print('didPush done  -> route.length = ${_routes.length}');
+    //print('didPush done  -> route.length = ${_routes.length}');
   }
 
   @override
   void didRemove(Route route, Route previousRoute) {
-    print('didRemove start -> route.length = ${_routes.length}');
+    //print('didRemove start -> route.length = ${_routes.length}');
     _routes.remove(route);
-    print('didRemove done  -> route.length = ${_routes.length}');
+    //print('didRemove done  -> route.length = ${_routes.length}');
   }
 
   @override
   void didReplace({Route newRoute, Route oldRoute}) {
-    print('didReplace start -> route.length = ${_routes.length}');
+    //print('didReplace start -> route.length = ${_routes.length}');
     final start = _routes.indexOf(oldRoute);
     if (start >= 0) {
       _routes.replaceRange(start, start + 1, [newRoute]);
     } else {
       _routes.add(newRoute);
     }
-    print('didReplace done  -> route.length = ${_routes.length}');
+    //print('didReplace done  -> route.length = ${_routes.length}');
   }
 }
