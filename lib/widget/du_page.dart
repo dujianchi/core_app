@@ -15,3 +15,22 @@ abstract class DuPage extends DuStatelessWidget {
   /// build child
   Widget buildChild(BuildContext context);
 }
+
+abstract class DuState<T extends DuStatefulWidget> extends State<T> {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        key: widget.scaffoldKey,
+        appBar: buildAppBar(context),
+        body: buildChild(context),
+      );
+
+  void showSnackBar({SnackBar snackBar, Widget content, String text}) {
+    widget.showSnackBar(snackBar: snackBar, content: content, text: text);
+  }
+
+  /// build app bar
+  Widget buildAppBar(BuildContext context) => null;
+
+  /// build child
+  Widget buildChild(BuildContext context);
+}
