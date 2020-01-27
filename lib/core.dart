@@ -6,10 +6,9 @@ export 'bases/texts.dart';
 export 'bases/texts_delegate.dart';
 export 'bases/u6.dart';
 export 'bases/tools.dart';
+export 'bases/du_app.dart';
 
 export 'pop/du_dialog_route.dart';
-export 'pop/flushbar.dart';
-export 'pop/toast.dart';
 
 export 'refresh/du_grid_view.dart';
 export 'refresh/du_list_view.dart';
@@ -18,3 +17,7 @@ export 'refresh/du_scroll_view.dart';
 
 export 'widget/override_app_bar.dart';
 export 'widget/override_tabs.dart';
+export 'widget/du_main.dart';
+export 'widget/du_page.dart';
+
+export 'utils/du_string_utils.dart';

@@ -115,6 +115,7 @@ class OverrideAppBar extends StatefulWidget implements PreferredSizeWidget {
       case TargetPlatform.fuchsia:
         return false;
       case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
         return actions == null || actions.length < 2;
     }
     return null;
@@ -208,6 +209,7 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
           namesRoute = true;
           break;
         case TargetPlatform.iOS:
+        case TargetPlatform.macOS:
           break;
       }
       title = DefaultTextStyle(
@@ -371,8 +373,7 @@ class _FloatingAppBarState extends State<_FloatingAppBar> {
   }
 
   RenderSliverFloatingPersistentHeader _headerRenderer() {
-    return context.ancestorRenderObjectOfType(
-        const TypeMatcher<RenderSliverFloatingPersistentHeader>());
+    return context.findAncestorRenderObjectOfType<RenderSliverFloatingPersistentHeader>();
   }
 
   void _isScrollingListener() {
