@@ -2,7 +2,7 @@ import 'package:core_app/core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class DuMain extends DuStatelessWidget {
+class DuMain extends BaseMaterialApp {
   final double designWidth;
   final PreferredSizeWidget appBar;
   final Widget body;
@@ -25,6 +25,7 @@ class DuMain extends DuStatelessWidget {
   final double drawerEdgeDragWidth;
 
   DuMain({
+    //scallford
     this.designWidth = Dimens.default_design_width,
     this.appBar,
     this.body,
@@ -45,9 +46,103 @@ class DuMain extends DuStatelessWidget {
     this.extendBodyBehindAppBar = false,
     this.drawerScrimColor,
     this.drawerEdgeDragWidth,
-  });
+    // material app
+    Key key,
+    navigatorKey,
+    routes: const <String, WidgetBuilder>{},
+    initialRoute,
+    onGenerateRoute,
+    onUnknownRoute,
+    builder,
+    title: '',
+    onGenerateTitle,
+    color,
+    theme,
+    locale,
+    localizationsDelegates: BaseMaterialApp.duLocalizationsDelegates,
+    localeListResolutionCallback,
+    localeResolutionCallback,
+    supportedLocales: Texts.support_locales,
+    debugShowMaterialGrid: false,
+    showPerformanceOverlay: false,
+    checkerboardRasterCacheImages: false,
+    checkerboardOffscreenLayers: false,
+    showSemanticsDebugger: false,
+    debugShowCheckedModeBanner: true,
+  }) : super(
+          key: key,
+          navigatorKey: navigatorKey,
+          home: Builder(
+            builder: (context) => _buildHome(
+              context: context,
+              designWidth: designWidth,
+              appBar: appBar,
+              body: body,
+              floatingActionButton: floatingActionButton,
+              floatingActionButtonLocation: floatingActionButtonLocation,
+              floatingActionButtonAnimator: floatingActionButtonAnimator,
+              persistentFooterButtons: persistentFooterButtons,
+              drawer: drawer,
+              endDrawer: endDrawer,
+              bottomNavigationBar: bottomNavigationBar,
+              bottomSheet: bottomSheet,
+              backgroundColor: backgroundColor,
+              resizeToAvoidBottomPadding: resizeToAvoidBottomPadding,
+              resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+              primary: primary,
+              drawerDragStartBehavior: drawerDragStartBehavior,
+              extendBody: extendBody,
+              extendBodyBehindAppBar: extendBodyBehindAppBar,
+              drawerScrimColor: drawerScrimColor,
+              drawerEdgeDragWidth: drawerEdgeDragWidth,
+            ),
+          ),
+          routes: routes,
+          initialRoute: initialRoute,
+          onGenerateRoute: onGenerateRoute,
+          onUnknownRoute: onUnknownRoute,
+          navigatorObservers: [U6()],
+          builder: builder,
+          title: title,
+          onGenerateTitle: onGenerateTitle,
+          color: color,
+          theme: theme,
+          locale: locale,
+          localizationsDelegates: localizationsDelegates,
+          localeListResolutionCallback: localeListResolutionCallback,
+          localeResolutionCallback: localeResolutionCallback,
+          supportedLocales: supportedLocales,
+          debugShowMaterialGrid: debugShowMaterialGrid,
+          showPerformanceOverlay: showPerformanceOverlay,
+          checkerboardRasterCacheImages: checkerboardRasterCacheImages,
+          checkerboardOffscreenLayers: checkerboardOffscreenLayers,
+          showSemanticsDebugger: showSemanticsDebugger,
+          debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+        );
 
-  Widget buildHome(BuildContext context) {
+  static Widget _buildHome({
+    BuildContext context,
+    double designWidth,
+    PreferredSizeWidget appBar,
+    Widget body,
+    Widget floatingActionButton,
+    FloatingActionButtonLocation floatingActionButtonLocation,
+    FloatingActionButtonAnimator floatingActionButtonAnimator,
+    List<Widget> persistentFooterButtons,
+    Widget drawer,
+    Widget endDrawer,
+    Widget bottomNavigationBar,
+    Widget bottomSheet,
+    Color backgroundColor,
+    bool resizeToAvoidBottomPadding,
+    bool resizeToAvoidBottomInset,
+    bool primary,
+    DragStartBehavior drawerDragStartBehavior,
+    bool extendBody,
+    bool extendBodyBehindAppBar,
+    Color drawerScrimColor,
+    double drawerEdgeDragWidth,
+  }) {
     Dimens.init(context, designWidth);
     return Scaffold(
       appBar: appBar,
@@ -71,12 +166,4 @@ class DuMain extends DuStatelessWidget {
       drawerEdgeDragWidth: drawerEdgeDragWidth,
     );
   }
-
-  @override
-  Widget build(BuildContext context) => BaseMaterialApp(
-        navigatorObservers: [U6()],
-        home: Builder(
-          builder: (context) => buildHome(context),
-        ),
-      );
 }

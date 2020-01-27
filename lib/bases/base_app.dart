@@ -7,7 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 /// base MaterialApp
 class BaseMaterialApp extends MaterialApp {
-  static const _localizationsDelegates = const <LocalizationsDelegate>[
+  static const duLocalizationsDelegates = const <LocalizationsDelegate>[
     TextsDelegate.delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
@@ -28,7 +28,7 @@ class BaseMaterialApp extends MaterialApp {
     color,
     theme,
     locale,
-    localizationsDelegates: _localizationsDelegates,
+    localizationsDelegates: duLocalizationsDelegates,
     localeListResolutionCallback,
     localeResolutionCallback,
     supportedLocales: Texts.support_locales,
@@ -39,30 +39,31 @@ class BaseMaterialApp extends MaterialApp {
     showSemanticsDebugger: false,
     debugShowCheckedModeBanner: true,
   }) : super(
-            key: key,
-            navigatorKey: navigatorKey,
-            home: home,
-            routes: routes,
-            initialRoute: initialRoute,
-            onGenerateRoute: onGenerateRoute,
-            onUnknownRoute: onUnknownRoute,
-            navigatorObservers: navigatorObservers,
-            builder: builder,
-            title: title,
-            onGenerateTitle: onGenerateTitle,
-            color: color,
-            theme: theme,
-            locale: locale,
-            localizationsDelegates: localizationsDelegates,
-            localeListResolutionCallback: localeListResolutionCallback,
-            localeResolutionCallback: localeResolutionCallback,
-            supportedLocales: supportedLocales,
-            debugShowMaterialGrid: debugShowMaterialGrid,
-            showPerformanceOverlay: showPerformanceOverlay,
-            checkerboardRasterCacheImages: checkerboardRasterCacheImages,
-            checkerboardOffscreenLayers: checkerboardOffscreenLayers,
-            showSemanticsDebugger: showSemanticsDebugger,
-            debugShowCheckedModeBanner: debugShowCheckedModeBanner);
+          key: key,
+          navigatorKey: navigatorKey,
+          home: home,
+          routes: routes,
+          initialRoute: initialRoute,
+          onGenerateRoute: onGenerateRoute,
+          onUnknownRoute: onUnknownRoute,
+          navigatorObservers: navigatorObservers,
+          builder: builder,
+          title: title,
+          onGenerateTitle: onGenerateTitle,
+          color: color,
+          theme: theme,
+          locale: locale,
+          localizationsDelegates: localizationsDelegates,
+          localeListResolutionCallback: localeListResolutionCallback,
+          localeResolutionCallback: localeResolutionCallback,
+          supportedLocales: supportedLocales,
+          debugShowMaterialGrid: debugShowMaterialGrid,
+          showPerformanceOverlay: showPerformanceOverlay,
+          checkerboardRasterCacheImages: checkerboardRasterCacheImages,
+          checkerboardOffscreenLayers: checkerboardOffscreenLayers,
+          showSemanticsDebugger: showSemanticsDebugger,
+          debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+        );
 }
 
 /// base StatefulWidget
@@ -75,7 +76,6 @@ abstract class BaseStatefulWidget extends StatefulWidget {
 
   /// 当前页面中需要用到的字符串
   Map<String, Map<String, String>> stringMaps() => const {};
-
 }
 
 /// base StatelessWidget
@@ -88,5 +88,4 @@ abstract class BaseStatelessWidget extends StatelessWidget {
 
   /// 当前页面中需要用到的字符串
   Map<String, Map<String, String>> stringMaps() => const {};
-
 }
