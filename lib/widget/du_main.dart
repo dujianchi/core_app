@@ -2,7 +2,7 @@ import 'package:core_app/core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class DuMain extends BaseStatelessWidget {
+class DuMain extends DuStatelessWidget {
   final PreferredSizeWidget appBar;
   final Widget body;
   final Widget floatingActionButton;
