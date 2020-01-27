@@ -25,7 +25,7 @@ class DuMain extends DuStatelessWidget {
   final double drawerEdgeDragWidth;
 
   DuMain({
-    this.designWidth,
+    this.designWidth = 750.0,
     this.appBar,
     this.body,
     this.floatingActionButton,
