@@ -54,16 +54,26 @@
       first = false;
 
       if (json[key] instanceof Array) {
-        var childName = key.charAt(0).toUpperCase() + key.substr(1, key.length - 1);
-        childName = formatName(childName);
-        field += '\tList<' + childName + '> ' + keyName + ';\n';
         var list = json[key];
         var obj = list[0];
-        var childObj = toJson(childName, JSON.stringify(obj));
-        explain = childObj + '\n\n' + explain;
-        constructor_json += '\t\t\tvar list = json[\'' + key + '\'];\n\t\t\tif(list != null && list is List){\n\t\t\t\t' + keyName + ' = List<' + childName 
-        + '>();\n\t\t\t\tfor (var obj in list) {\n\t\t\t\t\t' + keyName + '.add('
-          + childName + '.fromJson(obj));\n\t\t\t\t}\n\t\t\t}\n';
+        if (obj.constructor == String) {
+          field += '\tList<String> ' + keyName + ';\n';
+
+          constructor_json += '\t\t\tvar list = json[\'' + key + '\'];\n\t\t\tif(list != null && list is List){\n\t\t\t\t'
+            + keyName + ' = List<String>();\n\t\t\t\tfor (var obj in list) {\n\t\t\t\t\t'
+            + keyName + '.add(\'${obj ?? \'\'}\');\n\t\t\t\t}\n\t\t\t}\n';
+        } else {
+          var childName = key.charAt(0).toUpperCase() + key.substr(1, key.length - 1);
+          childName = formatName(childName);
+          field += '\tList<' + childName + '> ' + keyName + ';\n';
+
+          var childObj = toJson(childName, JSON.stringify(obj));
+          explain = childObj + '\n\n' + explain;
+          constructor_json += '\t\t\tvar list = json[\'' + key + '\'];\n\t\t\tif(list != null && list is List){\n\t\t\t\t'
+            + keyName + ' = List<' + childName
+            + '>();\n\t\t\t\tfor (var obj in list) {\n\t\t\t\t\t' + keyName + '.add('
+            + childName + '.fromJson(obj));\n\t\t\t\t}\n\t\t\t}\n';
+        }
       } else if (json[key] instanceof Object) {
         var childName = key.charAt(0).toUpperCase() + key.substr(1, key.length - 1);
         field += '\t' + childName + ' ' + keyName + ';\n';
@@ -72,33 +82,33 @@
         constructor_json += '\t\t\t' + keyName + ' = ' + childName + '.fromJson(json[\'' + key + '\']);\n';
       } else {
         field += '\tString ' + keyName + ';\n';
-        constructor_json += '\t\t\t' + keyName + ' = \'${json[\'' + key + '\'] ?? \'\'}\';\n';
+        constructor_json += '\t\t\t' + keyName + ' = \'${json[\'' + key + '\'] ?? \'\' }\';\n';
       }
 
       explain += '///\t' + keyName + ' = ' + json[key] + '\n';
     }
     toString += '}\';\n\t}'
-    return explain 
-      + 'class ' + name + ' {\n' 
-      + field + '\n' 
-      + constructor_none + '});\n\n' 
-      + constructor_json + '\t\t}\n\t}' 
-      + toString 
+    return explain
+      + 'class ' + name + ' {\n'
+      + field + '\n'
+      + constructor_none + '});\n\n'
+      + constructor_json + '\t\t}\n\t}'
+      + toString
       + '\n}';
   };
 
-  function formatName(string){
+  function formatName(string) {
     var str = new String(string);
     var index = str.indexOf('_');
     if (index == 0) {
       str = str.substring(1);
-    } else if(index > 0){
+    } else if (index > 0) {
       var first = str.substring(0, index);
-      var second = str.charAt(index+1).toUpperCase();
-      var third = str.substring(index+2)
-      str = first+second+third;
+      var second = str.charAt(index + 1).toUpperCase();
+      var third = str.substring(index + 2)
+      str = first + second + third;
     }
-    if (str.indexOf('_') >=0) {
+    if (str.indexOf('_') >= 0) {
       str = formatName(str);
     }
     return str;
