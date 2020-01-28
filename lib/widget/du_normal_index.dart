@@ -24,6 +24,7 @@ class DuNormalIndex extends DuStatelessWidget {
   final Color drawerScrimColor;
   final double drawerEdgeDragWidth;
   // tab bar
+  final Color bottomNavigationBarColor;
   final int length;
   final List<Widget> tabs;
   final List<Widget> children;
@@ -50,6 +51,7 @@ class DuNormalIndex extends DuStatelessWidget {
     this.drawerScrimColor,
     this.drawerEdgeDragWidth,
     // tab bar
+    this.bottomNavigationBarColor,
     this.length,
     this.tabs,
     this.children,
@@ -84,7 +86,7 @@ class DuNormalIndex extends DuStatelessWidget {
           drawerEdgeDragWidth: drawerEdgeDragWidth,
           key: scaffoldKey,
           bottomNavigationBar: Material(
-            color: Theme.of(context).primaryColor,
+            color: bottomNavigationBarColor ?? Theme.of(context).primaryColor,
             child: TabBar(
               tabs: tabs,
             ),
