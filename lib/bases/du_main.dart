@@ -25,8 +25,8 @@ class DuMain extends BaseMaterialApp {
   final double drawerEdgeDragWidth;
 
   DuMain({
-    //scallford
     this.designWidth = Dimens.default_design_width,
+    //scallford
     this.appBar,
     this.body,
     this.floatingActionButton,
