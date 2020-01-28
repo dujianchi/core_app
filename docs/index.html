@@ -10,7 +10,7 @@
 
 <body>
   <div id="app">
-    <el-row :gutter="10" :type="flex">
+    <el-row :gutter="10">
       <el-col :span="12">
         <el-input type="textarea" :rows="15" placeholder="请输入json" v-model="json"></el-input>
       </el-col>
@@ -18,7 +18,7 @@
         <el-input type="textarea" :rows="15" placeholder="结果" v-model="result"></el-input>
       </el-col>
     </el-row>
-    <el-row :align="middle" :gutter="10">
+    <el-row :gutter="10">
       <el-col :span="24">
         <el-button @click="revertJson">转换</el-button>
       </el-col>
