@@ -9,6 +9,7 @@ class U6 extends NavigatorObserver {
   factory U6() => _instance;
 
   static final List<Route> _routes = List();
+  
   static List<Route> get routes => _routes;
   static NavigatorState get nav => _instance.navigator;
 
@@ -69,6 +70,29 @@ class U6 extends NavigatorObserver {
       );
     }
     return need != null ? nav.push(need) : null;
+  }
+
+  /// push
+  static Future<T> pushReplacement<T extends Object, TO extends Object>({
+    Route<T> route,
+    Widget next,
+    RouteSettings settings,
+    bool maintainState = true,
+    bool fullscreenDialog = false,
+    TO result,
+  }) {
+    Route<T> need;
+    if (route != null) {
+      need = route;
+    } else if (next != null) {
+      need = MaterialPageRoute<T>(
+        builder: (context) => next,
+        settings: settings,
+        maintainState: maintainState,
+        fullscreenDialog: fullscreenDialog,
+      );
+    }
+    return need != null ? nav.pushReplacement(need, result: result) : null;
   }
 
   @override
