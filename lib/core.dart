@@ -9,6 +9,7 @@ export 'bases/tools.dart';
 export 'bases/du_app.dart';
 export 'bases/du_main.dart';
 export 'bases/du_page.dart';
+export 'bases/du_scaffold_method.dart';
 
 export 'pop/du_dialog_route.dart';
 
