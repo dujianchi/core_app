@@ -117,8 +117,11 @@ class OverrideAppBar extends StatefulWidget implements PreferredSizeWidget {
       case TargetPlatform.iOS:
       case TargetPlatform.macOS:
         return actions == null || actions.length < 2;
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        return false;
     }
-    return null;
+    return true;
   }
 
   @override
@@ -210,6 +213,8 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
           break;
         case TargetPlatform.iOS:
         case TargetPlatform.macOS:
+        case TargetPlatform.linux:
+        case TargetPlatform.windows:
           break;
       }
       title = DefaultTextStyle(

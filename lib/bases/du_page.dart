@@ -1,6 +1,7 @@
 import 'package:core_app/core.dart';
 import 'package:flutter/material.dart';
 
+/// 作为主要的界面，继承于StatelessWidget
 abstract class DuPage extends DuStatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -16,6 +17,7 @@ abstract class DuPage extends DuStatelessWidget {
   Widget buildChild(BuildContext context);
 }
 
+/// 作为主要的state类继承于State
 abstract class DuState<T extends DuStatefulWidget> extends State<T> {
   @override
   Widget build(BuildContext context) => Scaffold(
