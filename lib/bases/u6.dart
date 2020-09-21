@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 /// ui route stack
 ///  short name 'ui stack'
 ///   short short name 'u6'
-class U6 extends NavigatorObserver {
-  static final U6 _instance = U6._internal();
-  U6._internal();
-  factory U6() => _instance;
+class App extends NavigatorObserver {
+  static final App _instance = App._internal();
+  App._internal();
+  factory App() => _instance;
 
   static final List<Route> _routes = List();
   
+  static NavigatorObserver get instance => _instance;
   static List<Route> get routes => _routes;
   static NavigatorState get nav => _instance.navigator;
 

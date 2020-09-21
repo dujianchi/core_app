@@ -101,7 +101,7 @@ class DuMain extends BaseMaterialApp {
           initialRoute: initialRoute,
           onGenerateRoute: onGenerateRoute,
           onUnknownRoute: onUnknownRoute,
-          navigatorObservers: [U6()],
+          navigatorObservers: [App.instance],
           builder: builder,
           title: title,
           onGenerateTitle: onGenerateTitle,
