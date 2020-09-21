@@ -155,7 +155,7 @@ class _ShowSomething {
         shape: shape,
         behavior: behavior,
         action: actionOrHide,
-        duration: duration,
+        duration: duration ?? const Duration(seconds: 3),
         animation: animation,
         onVisible: onVisible,
       );
