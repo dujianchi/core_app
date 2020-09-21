@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 /// 作为主要的界面，继承于StatelessWidget
 abstract class DuPage extends DuStatelessWidget {
+  DuPage({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Scaffold(
         key: scaffoldKey,

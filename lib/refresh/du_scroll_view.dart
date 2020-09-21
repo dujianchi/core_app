@@ -3,8 +3,10 @@ library duscroll;
 import 'package:flutter/material.dart';
 import 'package:core_app/refresh/du_listeners.dart';
 
+import '../core.dart';
+
 /// 带刷新和下拉的scrollview
-class DuScrollView extends StatelessWidget {
+class DuScrollView extends DuStatelessWidget {
   final Widget child;
   final Widget emptyView;
   final RefreshCallback onRefresh;

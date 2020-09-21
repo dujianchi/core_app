@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'base_app.dart';
 
 abstract class DuStatefulWidget extends BaseStatefulWidget {
+  DuStatefulWidget({Key key}) : super(key: key);
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
@@ -27,6 +29,8 @@ abstract class DuStatefulWidget extends BaseStatefulWidget {
 }
 
 abstract class DuStatelessWidget extends BaseStatelessWidget {
+  DuStatelessWidget({Key key}) : super(key: key);
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;

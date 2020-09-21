@@ -3,8 +3,10 @@ library dulist;
 import 'package:flutter/material.dart';
 import 'package:core_app/refresh/du_listeners.dart';
 
+import '../core.dart';
+
 /// 带刷新和下拉的listview
-class DuListView extends StatelessWidget {
+class DuListView extends DuStatelessWidget {
   final int itemCount;
   final IndexedWidgetBuilder itemBuilder;
   final List<Widget> children;
