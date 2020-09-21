@@ -143,9 +143,10 @@ class _ShowSomething {
     SnackBar show;
     if (snackBar != null) {
       show = snackBar;
-    } else if (content != null) {
+    } else {
+      var contentWidget = content != null ? content : Text('$text');
       show = SnackBar(
-        content: content,
+        content: contentWidget,
         backgroundColor: backgroundColor,
         elevation: elevation,
         margin: margin,
@@ -157,10 +158,6 @@ class _ShowSomething {
         duration: duration,
         animation: animation,
         onVisible: onVisible,
-      );
-    } else if (text?.isNotEmpty == true) {
-      show = SnackBar(
-        content: Text('$text'),
       );
     }
     if (show != null) {
