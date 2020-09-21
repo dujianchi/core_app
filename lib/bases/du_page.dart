@@ -71,3 +71,45 @@ abstract class DuState<T extends DuStatefulWidget> extends State<T>
   /// build child
   Widget buildChild(BuildContext context);
 }
+
+///作为默认主页样式
+abstract class DuPageBottomNav extends DuPage {
+  // tab bar
+  final Color bottomNavigationBarColor;
+  final int length;
+  final List<Widget> tabs;
+  final List<Widget> children;
+
+  DuPageBottomNav({
+    // tab bar
+    this.bottomNavigationBarColor,
+    this.length,
+    this.tabs,
+    this.children,
+  }) {
+    assert(length != null && tabs != null && children != null);
+    assert(
+        length > 0 && tabs.length == children.length && tabs.length == length);
+  }
+
+  @override
+  Widget build(BuildContext context) => DefaultTabController(
+        length: tabChildren(context).length,
+        child: super.build(context),
+      );
+
+  @override
+  Widget bottomNavigationBar(context) => Material(
+        color: bottomNavigationBarColor ?? Theme.of(context).primaryColor,
+        child: TabBar(
+          tabs: tabs,
+        ),
+      );
+
+  @override
+  Widget buildChild(BuildContext context) => TabBarView(
+        children: tabChildren(context),
+      );
+
+  List<Widget> tabChildren(BuildContext context);
+}

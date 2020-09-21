@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class DuScaffoldMethod {
   /// build app bar
-  Widget buildAppBar(BuildContext context) => null;
+  PreferredSizeWidget buildAppBar(BuildContext context) => null;
 
   Widget floatingActionButton(BuildContext context) => null;
   FloatingActionButtonLocation floatingActionButtonLocation(
