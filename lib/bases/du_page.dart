@@ -39,7 +39,8 @@ abstract class DuPage extends DuStatelessWidget with DuScaffoldMethod {
 
 /// 作为主要的state类继承于State
 abstract class DuState<T extends DuStatefulWidget> extends State<T>
-    with DuScaffoldMethod {
+    with DuScaffoldMethod
+    implements Toast {
   @override
   Widget build(BuildContext context) => Scaffold(
         key: widget.scaffoldKey,
@@ -66,8 +67,39 @@ abstract class DuState<T extends DuStatefulWidget> extends State<T>
         endDrawerEnableOpenDragGesture: endDrawerEnableOpenDragGesture(context),
       );
 
-  void showSnackBar({SnackBar snackBar, Widget content, String text}) {
-    widget.showSnackBar(snackBar: snackBar, content: content, text: text);
+  @override
+  void toastSnackBar({
+    SnackBar snackBar,
+    Widget content,
+    String text,
+    Color backgroundColor,
+    double elevation,
+    EdgeInsetsGeometry margin,
+    EdgeInsetsGeometry padding,
+    double width,
+    ShapeBorder shape,
+    SnackBarBehavior behavior,
+    SnackBarAction action,
+    Duration duration,
+    Animation<double> animation,
+    VoidCallback onVisible,
+  }) {
+    widget.toastSnackBar(
+      snackBar: snackBar,
+      content: content,
+      text: text,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      margin: margin,
+      padding: padding,
+      width: width,
+      shape: shape,
+      behavior: behavior,
+      action: action,
+      duration: duration,
+      animation: animation,
+      onVisible: onVisible,
+    );
   }
 
   /// build child
