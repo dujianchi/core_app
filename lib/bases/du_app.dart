@@ -28,6 +28,7 @@ abstract class DuStatefulWidget extends BaseStatefulWidget
     Duration duration,
     Animation<double> animation,
     VoidCallback onVisible,
+    String hideStr,
   }) {
     _showSnackBar(
       scaffoldKey: _scaffoldKey,
@@ -45,6 +46,7 @@ abstract class DuStatefulWidget extends BaseStatefulWidget
       duration: duration,
       animation: animation,
       onVisible: onVisible,
+      hideStr: hideStr,
     );
   }
 }
@@ -74,6 +76,7 @@ abstract class DuStatelessWidget extends BaseStatelessWidget
     Duration duration,
     Animation<double> animation,
     VoidCallback onVisible,
+    String hideStr,
   }) {
     _showSnackBar(
       scaffoldKey: _scaffoldKey,
@@ -111,6 +114,7 @@ abstract class Toast {
     Duration duration,
     Animation<double> animation,
     VoidCallback onVisible,
+    String hideStr,
   });
 }
 
@@ -131,15 +135,18 @@ class _ShowSomething {
     Duration duration,
     Animation<double> animation,
     VoidCallback onVisible,
+    String hideStr,
   }) {
     final SnackBarAction actionOrHide = action != null
         ? action
-        : SnackBarAction(
-            label: '知道了',
-            onPressed: () {
-              scaffoldKey?.currentState?.hideCurrentSnackBar();
-            },
-          );
+        : hideStr?.isNotEmpty == true
+            ? SnackBarAction(
+                label: hideStr,
+                onPressed: () {
+                  scaffoldKey?.currentState?.hideCurrentSnackBar();
+                },
+              )
+            : null;
     SnackBar show;
     if (snackBar != null) {
       show = snackBar;
@@ -160,8 +167,6 @@ class _ShowSomething {
         onVisible: onVisible,
       );
     }
-    if (show != null) {
-      scaffoldKey?.currentState?.showSnackBar(show);
-    }
+    scaffoldKey?.currentState?.showSnackBar(show);
   }
 }
