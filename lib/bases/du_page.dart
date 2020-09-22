@@ -259,6 +259,7 @@ class _ShowSomething {
         onVisible: onVisible,
       );
     }
+    scaffoldKey?.currentState?.hideCurrentSnackBar();
     scaffoldKey?.currentState?.showSnackBar(show);
   }
 }
