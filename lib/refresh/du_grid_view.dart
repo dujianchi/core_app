@@ -1,12 +1,10 @@
 library dugrid;
 
 import 'package:flutter/material.dart';
-import 'package:core_app/refresh/du_listeners.dart';
-
-import '../core.dart';
+import 'package:core_app/core.dart';
 
 /// 带刷新和下拉的gridview
-class DuGridView extends DuStatelessWidget {
+class DuGridView extends BaseStatelessWidget {
   final int itemCount;
   final IndexedWidgetBuilder itemBuilder;
   final List<Widget> children;

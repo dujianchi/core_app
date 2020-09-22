@@ -1,16 +1,58 @@
 import 'dart:math';
 
 import 'package:core_app/core.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 /// 作为主要的界面，继承于StatelessWidget
-abstract class DuPage extends DuStatelessWidget with DuScaffoldMethod {
+abstract class DuPage extends BaseStatelessWidget
+    with DuScaffoldMethod, _ShowSomething
+    implements Toast {
   DuPage({Key key}) : super(key: key);
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
+
+  @override
+  void toastSnackBar({
+    SnackBar snackBar,
+    Widget content,
+    String text,
+    Color backgroundColor,
+    double elevation,
+    EdgeInsetsGeometry margin,
+    EdgeInsetsGeometry padding,
+    double width,
+    ShapeBorder shape,
+    SnackBarBehavior behavior,
+    SnackBarAction action,
+    Duration duration,
+    Animation<double> animation,
+    VoidCallback onVisible,
+    String hideStr,
+  }) {
+    _showSnackBar(
+      scaffoldKey: _scaffoldKey,
+      snackBar: snackBar,
+      content: content,
+      text: text,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      margin: margin,
+      padding: padding,
+      width: width,
+      shape: shape,
+      behavior: behavior,
+      action: action,
+      duration: duration,
+      animation: animation,
+      onVisible: onVisible,
+    );
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        key: scaffoldKey,
+        key: _scaffoldKey,
         appBar: buildAppBar(context),
         body: buildChild(context),
         floatingActionButton: floatingActionButton(context),
@@ -39,12 +81,53 @@ abstract class DuPage extends DuStatelessWidget with DuScaffoldMethod {
 }
 
 /// 作为主要的state类继承于State
-abstract class DuState<T extends DuStatefulWidget> extends State<T>
-    with DuScaffoldMethod
+abstract class DuState<T extends BaseStatefulWidget> extends State<T>
+    with DuScaffoldMethod, _ShowSomething
     implements Toast {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
+
+  @override
+  void toastSnackBar({
+    SnackBar snackBar,
+    Widget content,
+    String text,
+    Color backgroundColor,
+    double elevation,
+    EdgeInsetsGeometry margin,
+    EdgeInsetsGeometry padding,
+    double width,
+    ShapeBorder shape,
+    SnackBarBehavior behavior,
+    SnackBarAction action,
+    Duration duration,
+    Animation<double> animation,
+    VoidCallback onVisible,
+    String hideStr,
+  }) {
+    _showSnackBar(
+      scaffoldKey: _scaffoldKey,
+      snackBar: snackBar,
+      content: content,
+      text: text,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      margin: margin,
+      padding: padding,
+      width: width,
+      shape: shape,
+      behavior: behavior,
+      action: action,
+      duration: duration,
+      animation: animation,
+      onVisible: onVisible,
+    );
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
-        key: widget.scaffoldKey,
+        key: _scaffoldKey,
         appBar: buildAppBar(context),
         body: buildChild(context),
         floatingActionButton: floatingActionButton(context),
@@ -67,43 +150,6 @@ abstract class DuState<T extends DuStatefulWidget> extends State<T>
         drawerEnableOpenDragGesture: drawerEnableOpenDragGesture(context),
         endDrawerEnableOpenDragGesture: endDrawerEnableOpenDragGesture(context),
       );
-
-  @override
-  void toastSnackBar({
-    SnackBar snackBar,
-    Widget content,
-    String text,
-    Color backgroundColor,
-    double elevation,
-    EdgeInsetsGeometry margin,
-    EdgeInsetsGeometry padding,
-    double width,
-    ShapeBorder shape,
-    SnackBarBehavior behavior,
-    SnackBarAction action,
-    Duration duration,
-    Animation<double> animation,
-    VoidCallback onVisible,
-    String hideStr,
-  }) {
-    widget.toastSnackBar(
-      snackBar: snackBar,
-      content: content,
-      text: text,
-      backgroundColor: backgroundColor,
-      elevation: elevation,
-      margin: margin,
-      padding: padding,
-      width: width,
-      shape: shape,
-      behavior: behavior,
-      action: action,
-      duration: duration,
-      animation: animation,
-      onVisible: onVisible,
-      hideStr: hideStr,
-    );
-  }
 
   /// build child
   Widget buildChild(BuildContext context);
@@ -142,4 +188,77 @@ abstract class DuPageBottomNav extends DuPage {
 
   /// tab按钮布局(位于底部)
   List<Widget> tabChildren(BuildContext context);
+}
+
+abstract class Toast {
+  void toastSnackBar({
+    SnackBar snackBar,
+    Widget content,
+    String text,
+    Color backgroundColor,
+    double elevation,
+    EdgeInsetsGeometry margin,
+    EdgeInsetsGeometry padding,
+    double width,
+    ShapeBorder shape,
+    SnackBarBehavior behavior,
+    SnackBarAction action,
+    Duration duration,
+    Animation<double> animation,
+    VoidCallback onVisible,
+    String hideStr,
+  });
+}
+
+class _ShowSomething {
+  void _showSnackBar({
+    GlobalKey<ScaffoldState> scaffoldKey,
+    SnackBar snackBar,
+    Widget content,
+    String text,
+    Color backgroundColor,
+    double elevation,
+    EdgeInsetsGeometry margin,
+    EdgeInsetsGeometry padding,
+    double width,
+    ShapeBorder shape,
+    SnackBarBehavior behavior,
+    SnackBarAction action,
+    Duration duration,
+    Animation<double> animation,
+    VoidCallback onVisible,
+    String hideStr,
+  }) {
+    final SnackBarAction actionOrHide = action != null
+        ? action
+        : hideStr?.isNotEmpty == true
+            ? SnackBarAction(
+                label: hideStr,
+                onPressed: () {
+                  scaffoldKey?.currentState?.hideCurrentSnackBar();
+                },
+              )
+            : null;
+    SnackBar show;
+    if (snackBar != null) {
+      show = snackBar;
+    } else {
+      var contentWidget = content != null ? content : Text('$text');
+      show = SnackBar(
+        content: contentWidget,
+        backgroundColor: backgroundColor,
+        elevation: elevation,
+        margin: margin,
+        padding: padding,
+        width: width,
+        shape: shape,
+        behavior: behavior ?? SnackBarBehavior.floating,
+        action: actionOrHide,
+        duration: duration ?? const Duration(seconds: 3),
+        animation: animation,
+        onVisible: onVisible,
+      );
+    }
+    scaffoldKey?.currentState?.showSnackBar(show);
+  }
 }

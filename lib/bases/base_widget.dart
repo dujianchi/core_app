@@ -1,7 +1,6 @@
 library baseapp;
 
-import 'texts.dart';
-import 'texts_delegate.dart';
+import 'package:core_app/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 

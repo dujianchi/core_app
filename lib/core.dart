@@ -1,12 +1,11 @@
 library core_app;
 
-export 'bases/base_app.dart';
-export 'bases/dimens.dart';
-export 'bases/texts.dart';
-export 'bases/texts_delegate.dart';
-export 'bases/u6.dart';
-export 'bases/tools.dart';
-export 'bases/du_app.dart';
+export 'bases/base_widget.dart';
+export 'utils/dimens.dart';
+export 'i18n/texts.dart';
+export 'i18n/texts_delegate.dart';
+export 'utils/u6.dart';
+export 'utils/tools.dart';
 export 'bases/du_main.dart';
 export 'bases/du_page.dart';
 export 'bases/du_scaffold_method.dart';

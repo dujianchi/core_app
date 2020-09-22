@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'texts.dart';
+import 'package:core_app/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
