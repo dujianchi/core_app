@@ -36,66 +36,6 @@ abstract class DuPage extends DuStatelessWidget with DuScaffoldMethod {
 
   /// build child
   Widget buildChild(BuildContext context);
-
-  // ------------ 这么一大段，没有实际意义，只是为了让vscode更好重写对应方法 (begin) ------------
-  @override
-  PreferredSizeWidget buildAppBar(BuildContext context) =>
-      super.buildAppBar(context);
-
-  @override
-  Widget floatingActionButton(BuildContext context) =>
-      super.floatingActionButton(context);
-  @override
-  FloatingActionButtonLocation floatingActionButtonLocation(
-          BuildContext context) =>
-      super.floatingActionButtonLocation(context);
-  @override
-  FloatingActionButtonAnimator floatingActionButtonAnimator(
-          BuildContext context) =>
-      super.floatingActionButtonAnimator(context);
-  @override
-  List<Widget> persistentFooterButtons(BuildContext context) =>
-      super.persistentFooterButtons(context);
-  @override
-  Widget drawer(BuildContext context) => super.drawer(context);
-  @override
-  Widget endDrawer(BuildContext context) => super.endDrawer(context);
-  @override
-  Widget bottomNavigationBar(BuildContext context) =>
-      super.bottomNavigationBar(context);
-  @override
-  Widget bottomSheet(BuildContext context) => super.bottomSheet(context);
-  @override
-  Color backgroundColor(BuildContext context) => super.backgroundColor(context);
-  @override
-  bool resizeToAvoidBottomPadding(BuildContext context) =>
-      super.resizeToAvoidBottomPadding(context);
-  @override
-  bool resizeToAvoidBottomInset(BuildContext context) =>
-      super.resizeToAvoidBottomInset(context);
-  @override
-  bool primary(BuildContext context) => super.primary(context);
-  @override
-  DragStartBehavior drawerDragStartBehavior(BuildContext context) =>
-      super.drawerDragStartBehavior(context);
-  @override
-  bool extendBody(BuildContext context) => super.extendBody(context);
-  @override
-  bool extendBodyBehindAppBar(BuildContext context) =>
-      super.extendBodyBehindAppBar(context);
-  @override
-  Color drawerScrimColor(BuildContext context) =>
-      super.drawerScrimColor(context);
-  @override
-  double drawerEdgeDragWidth(BuildContext context) =>
-      super.drawerEdgeDragWidth(context);
-  @override
-  bool drawerEnableOpenDragGesture(BuildContext context) =>
-      super.drawerEnableOpenDragGesture(context);
-  @override
-  bool endDrawerEnableOpenDragGesture(BuildContext context) =>
-      super.endDrawerEnableOpenDragGesture(context);
-  // ------------ 这么一大段，没有实际意义，只是为了让vscode更好重写对应方法 (end) ------------
 }
 
 /// 作为主要的state类继承于State
@@ -167,66 +107,6 @@ abstract class DuState<T extends DuStatefulWidget> extends State<T>
 
   /// build child
   Widget buildChild(BuildContext context);
-
-  // ------------ 这么一大段，没有实际意义，只是为了让vscode更好重写对应方法 (begin) ------------
-  @override
-  PreferredSizeWidget buildAppBar(BuildContext context) =>
-      super.buildAppBar(context);
-
-  @override
-  Widget floatingActionButton(BuildContext context) =>
-      super.floatingActionButton(context);
-  @override
-  FloatingActionButtonLocation floatingActionButtonLocation(
-          BuildContext context) =>
-      super.floatingActionButtonLocation(context);
-  @override
-  FloatingActionButtonAnimator floatingActionButtonAnimator(
-          BuildContext context) =>
-      super.floatingActionButtonAnimator(context);
-  @override
-  List<Widget> persistentFooterButtons(BuildContext context) =>
-      super.persistentFooterButtons(context);
-  @override
-  Widget drawer(BuildContext context) => super.drawer(context);
-  @override
-  Widget endDrawer(BuildContext context) => super.endDrawer(context);
-  @override
-  Widget bottomNavigationBar(BuildContext context) =>
-      super.bottomNavigationBar(context);
-  @override
-  Widget bottomSheet(BuildContext context) => super.bottomSheet(context);
-  @override
-  Color backgroundColor(BuildContext context) => super.backgroundColor(context);
-  @override
-  bool resizeToAvoidBottomPadding(BuildContext context) =>
-      super.resizeToAvoidBottomPadding(context);
-  @override
-  bool resizeToAvoidBottomInset(BuildContext context) =>
-      super.resizeToAvoidBottomInset(context);
-  @override
-  bool primary(BuildContext context) => super.primary(context);
-  @override
-  DragStartBehavior drawerDragStartBehavior(BuildContext context) =>
-      super.drawerDragStartBehavior(context);
-  @override
-  bool extendBody(BuildContext context) => super.extendBody(context);
-  @override
-  bool extendBodyBehindAppBar(BuildContext context) =>
-      super.extendBodyBehindAppBar(context);
-  @override
-  Color drawerScrimColor(BuildContext context) =>
-      super.drawerScrimColor(context);
-  @override
-  double drawerEdgeDragWidth(BuildContext context) =>
-      super.drawerEdgeDragWidth(context);
-  @override
-  bool drawerEnableOpenDragGesture(BuildContext context) =>
-      super.drawerEnableOpenDragGesture(context);
-  @override
-  bool endDrawerEnableOpenDragGesture(BuildContext context) =>
-      super.endDrawerEnableOpenDragGesture(context);
-  // ------------ 这么一大段，没有实际意义，只是为了让vscode更好重写对应方法 (end) ------------
 }
 
 ///作为默认主页样式
