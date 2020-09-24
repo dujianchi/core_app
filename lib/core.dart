@@ -20,6 +20,4 @@ export 'refresh/du_scroll_view.dart';
 export 'widget/override_app_bar.dart';
 export 'widget/override_tabs.dart';
 
-export 'web/web_compat.dart';
-
 export 'utils/du_string_utils.dart';

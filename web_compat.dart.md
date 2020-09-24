@@ -1,3 +1,4 @@
+```
 import 'package:core_app/core.dart';
 import 'package:flutter/material.dart';
 
@@ -38,3 +39,4 @@ class WebCompat extends DuPage {
         })
       : webView;
 }
+```
