@@ -69,11 +69,14 @@ class DuMain extends BaseMaterialApp {
     checkerboardOffscreenLayers: false,
     showSemanticsDebugger: false,
     debugShowCheckedModeBanner: true,
+    // mine
+    initDimens: true,
   }) : super(
           key: key,
           navigatorKey: navigatorKey,
           home: Builder(
             builder: (context) => _buildHome(
+              initDimens: initDimens,
               context: context,
               designWidth: designWidth,
               appBar: appBar,
@@ -121,6 +124,7 @@ class DuMain extends BaseMaterialApp {
         );
 
   static Widget _buildHome({
+    bool initDimens,
     BuildContext context,
     double designWidth,
     PreferredSizeWidget appBar,
@@ -143,7 +147,7 @@ class DuMain extends BaseMaterialApp {
     Color drawerScrimColor,
     double drawerEdgeDragWidth,
   }) {
-    Dimens.init(context, designWidth);
+    if (initDimens == true) Dimens.init(context, designWidth);
     return Scaffold(
       appBar: appBar,
       body: body,
