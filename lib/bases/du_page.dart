@@ -203,8 +203,10 @@ class _ShowSomething {
       final mediaQuery = MediaQuery.of(scaffoldKey.currentContext);
       final padding = mediaQuery.padding;
       final height = mediaQuery.size.height;
-      margin =
-          EdgeInsets.only(bottom: (height - padding.top - padding.bottom) / 2);
+      margin = EdgeInsets.only(
+          left: padding.left,
+          right: padding.right,
+          bottom: (height - padding.top - padding.bottom) * 2 / 3);
     }
     SnackBar show;
     if (snackBar != null) {
