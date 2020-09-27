@@ -196,6 +196,15 @@ class _ShowSomething {
                 },
               )
             : null;
+    if (behavior == SnackBarBehavior.floating &&
+        margin == null &&
+        scaffoldKey?.currentContext != null) {
+      final mediaQuery = MediaQuery.of(scaffoldKey.currentContext);
+      final padding = mediaQuery.padding;
+      final height = mediaQuery.size.height;
+      margin =
+          EdgeInsets.only(bottom: (height - padding.top - padding.bottom) / 2);
+    }
     SnackBar show;
     if (snackBar != null) {
       show = snackBar;
