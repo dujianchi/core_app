@@ -206,7 +206,7 @@ class _ShowSomething {
       margin = EdgeInsets.only(
           left: padding.left,
           right: padding.right,
-          bottom: padding.top + padding.bottom);
+          bottom: padding.top + padding.bottom + kToolbarHeight);
     }
     SnackBar show;
     if (snackBar != null) {
