@@ -221,7 +221,7 @@ class _ShowSomething {
         padding: padding,
         width: width,
         shape: shape,
-        behavior: behavior ?? SnackBarBehavior.floating,
+        behavior: behavior,
         action: actionOrHide,
         duration: duration ?? const Duration(seconds: 3),
         animation: animation,
