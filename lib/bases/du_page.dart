@@ -4,6 +4,7 @@ import 'package:core_app/core.dart';
 import 'package:flutter/material.dart';
 
 /// 作为主要的界面，继承于StatelessWidget
+/// 内部使用了Scaffold，不能作为所有控件的父类
 abstract class DuPage extends BaseStatelessWidget
     with DuScaffoldMethod, _ShowSomething
     implements Toast {
