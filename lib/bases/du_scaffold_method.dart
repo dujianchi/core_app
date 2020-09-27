@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class DuScaffoldMethod {
   /// build app bar
-  PreferredSizeWidget buildAppBar(BuildContext context) => null;
+  PreferredSizeWidget appBar(BuildContext context) => null;
 
   Widget floatingActionButton(BuildContext context) => null;
   FloatingActionButtonLocation floatingActionButtonLocation(
@@ -30,6 +30,38 @@ class DuScaffoldMethod {
   bool drawerEnableOpenDragGesture(BuildContext context) => true;
   bool endDrawerEnableOpenDragGesture(BuildContext context) => true;
 
+  Widget buildView(
+    Key scaffoldKey,
+    BuildContext context,
+    Widget body,
+  ) =>
+      Scaffold(
+        key: scaffoldKey,
+        appBar: this.appBar(context),
+        body: body,
+        floatingActionButton: this.floatingActionButton(context),
+        floatingActionButtonLocation:
+            this.floatingActionButtonLocation(context),
+        floatingActionButtonAnimator:
+            this.floatingActionButtonAnimator(context),
+        persistentFooterButtons: this.persistentFooterButtons(context),
+        drawer: this.drawer(context),
+        endDrawer: this.endDrawer(context),
+        bottomNavigationBar: this.bottomNavigationBar(context),
+        bottomSheet: this.bottomSheet(context),
+        backgroundColor: this.backgroundColor(context),
+        resizeToAvoidBottomPadding: this.resizeToAvoidBottomPadding(context),
+        resizeToAvoidBottomInset: this.resizeToAvoidBottomInset(context),
+        primary: this.primary(context),
+        drawerDragStartBehavior: this.drawerDragStartBehavior(context),
+        extendBody: this.extendBody(context),
+        extendBodyBehindAppBar: this.extendBodyBehindAppBar(context),
+        drawerScrimColor: this.drawerScrimColor(context),
+        drawerEdgeDragWidth: this.drawerEdgeDragWidth(context),
+        drawerEnableOpenDragGesture: this.drawerEnableOpenDragGesture(context),
+        endDrawerEnableOpenDragGesture:
+            this.endDrawerEnableOpenDragGesture(context),
+      );
   // // 在字类实现下面一段代码，可以让vscode更方便的提示继承的方法，但是失去了意义
   // // ------------ 这么一大段，没有实际意义，只是为了让vscode更好重写对应方法 (begin) ------------
   // @override

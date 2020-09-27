@@ -52,30 +52,8 @@ abstract class DuPage extends BaseStatelessWidget
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        key: _scaffoldKey,
-        appBar: buildAppBar(context),
-        body: buildChild(context),
-        floatingActionButton: floatingActionButton(context),
-        floatingActionButtonLocation: floatingActionButtonLocation(context),
-        floatingActionButtonAnimator: floatingActionButtonAnimator(context),
-        persistentFooterButtons: persistentFooterButtons(context),
-        drawer: drawer(context),
-        endDrawer: endDrawer(context),
-        bottomNavigationBar: bottomNavigationBar(context),
-        bottomSheet: bottomSheet(context),
-        backgroundColor: backgroundColor(context),
-        resizeToAvoidBottomPadding: resizeToAvoidBottomPadding(context),
-        resizeToAvoidBottomInset: resizeToAvoidBottomInset(context),
-        primary: primary(context),
-        drawerDragStartBehavior: drawerDragStartBehavior(context),
-        extendBody: extendBody(context),
-        extendBodyBehindAppBar: extendBodyBehindAppBar(context),
-        drawerScrimColor: drawerScrimColor(context),
-        drawerEdgeDragWidth: drawerEdgeDragWidth(context),
-        drawerEnableOpenDragGesture: drawerEnableOpenDragGesture(context),
-        endDrawerEnableOpenDragGesture: endDrawerEnableOpenDragGesture(context),
-      );
+  Widget build(BuildContext context) =>
+      buildView(_scaffoldKey, context, buildChild(context));
 
   /// build child
   Widget buildChild(BuildContext context);
@@ -127,30 +105,8 @@ abstract class DuState<T extends BaseStatefulWidget> extends State<T>
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        key: _scaffoldKey,
-        appBar: buildAppBar(context),
-        body: buildChild(context),
-        floatingActionButton: floatingActionButton(context),
-        floatingActionButtonLocation: floatingActionButtonLocation(context),
-        floatingActionButtonAnimator: floatingActionButtonAnimator(context),
-        persistentFooterButtons: persistentFooterButtons(context),
-        drawer: drawer(context),
-        endDrawer: endDrawer(context),
-        bottomNavigationBar: bottomNavigationBar(context),
-        bottomSheet: bottomSheet(context),
-        backgroundColor: backgroundColor(context),
-        resizeToAvoidBottomPadding: resizeToAvoidBottomPadding(context),
-        resizeToAvoidBottomInset: resizeToAvoidBottomInset(context),
-        primary: primary(context),
-        drawerDragStartBehavior: drawerDragStartBehavior(context),
-        extendBody: extendBody(context),
-        extendBodyBehindAppBar: extendBodyBehindAppBar(context),
-        drawerScrimColor: drawerScrimColor(context),
-        drawerEdgeDragWidth: drawerEdgeDragWidth(context),
-        drawerEnableOpenDragGesture: drawerEnableOpenDragGesture(context),
-        endDrawerEnableOpenDragGesture: endDrawerEnableOpenDragGesture(context),
-      );
+  Widget build(BuildContext context) =>
+      buildView(_scaffoldKey, context, buildChild(context));
 
   /// build child
   Widget buildChild(BuildContext context);
