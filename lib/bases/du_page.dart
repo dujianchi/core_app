@@ -196,6 +196,7 @@ class _ShowSomething {
                 },
               )
             : null;
+    behavior = behavior ?? SnackBarBehavior.floating;
     if (behavior == SnackBarBehavior.floating &&
         margin == null &&
         scaffoldKey?.currentContext != null) {
