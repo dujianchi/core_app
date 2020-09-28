@@ -66,25 +66,11 @@ class BaseMaterialApp extends MaterialApp {
 }
 
 /// base StatefulWidget
-abstract class BaseStatefulWidget extends StatefulWidget {
+abstract class BaseStatefulWidget extends StatefulWidget with I18n {
   const BaseStatefulWidget({Key key}) : super(key: key);
-
-  String getContextString(BuildContext context, String key) =>
-      Texts().getWithContext(context, stringMaps(), key);
-  String getString(String key) => Texts().getString(stringMaps(), key);
-
-  /// 当前页面中需要用到的字符串
-  Map<String, Map<String, String>> stringMaps() => const {};
 }
 
 /// base StatelessWidget
-abstract class BaseStatelessWidget extends StatelessWidget {
+abstract class BaseStatelessWidget extends StatelessWidget with I18n {
   const BaseStatelessWidget({Key key}) : super(key: key);
-
-  String getContextString(BuildContext context, String key) =>
-      Texts().getWithContext(context, stringMaps(), key);
-  String getString(String key) => Texts().getString(stringMaps(), key);
-
-  /// 当前页面中需要用到的字符串
-  Map<String, Map<String, String>> stringMaps() => const {};
 }
