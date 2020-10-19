@@ -2,6 +2,9 @@ import 'package:core_app/core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+/// 在Main类界面初始化时的回调，用于做一些需要context的初始化操作
+typedef OnMainPageInit(BuildContext context);
+
 class DuMain extends BaseMaterialApp {
   final double designWidth;
   final PreferredSizeWidget appBar;
@@ -26,6 +29,7 @@ class DuMain extends BaseMaterialApp {
 
   DuMain({
     this.designWidth = Dimens.default_design_width,
+    OnMainPageInit onMainPageInit,
     //scallford
     this.appBar,
     this.body,
@@ -76,6 +80,7 @@ class DuMain extends BaseMaterialApp {
           navigatorKey: navigatorKey,
           home: Builder(
             builder: (context) => _buildHome(
+              onMainPageInit: onMainPageInit,
               initDimens: initDimens,
               context: context,
               designWidth: designWidth,
@@ -124,6 +129,7 @@ class DuMain extends BaseMaterialApp {
         );
 
   static Widget _buildHome({
+    OnMainPageInit onMainPageInit,
     bool initDimens,
     BuildContext context,
     double designWidth,
@@ -148,6 +154,7 @@ class DuMain extends BaseMaterialApp {
     double drawerEdgeDragWidth,
   }) {
     if (initDimens == true) Dimens.init(context, designWidth);
+    if (onMainPageInit != null) onMainPageInit(context);
     return Scaffold(
       appBar: appBar,
       body: body,
