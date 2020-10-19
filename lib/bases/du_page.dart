@@ -197,17 +197,17 @@ class _ShowSomething {
               )
             : null;
     behavior = behavior ?? SnackBarBehavior.floating;
-    if (behavior == SnackBarBehavior.floating &&
-        margin == null &&
-        scaffoldKey?.currentContext != null) {
-      final mediaQuery = MediaQuery.of(scaffoldKey.currentContext);
-      final padding = mediaQuery.padding;
-      // final height = mediaQuery.size.height;
-      margin = EdgeInsets.only(
-          left: padding.left,
-          right: padding.right,
-          bottom: padding.top + padding.bottom + kToolbarHeight);
-    }
+    // if (behavior == SnackBarBehavior.floating &&
+    //     margin == null &&
+    //     scaffoldKey?.currentContext != null) {
+    //   final mediaQuery = MediaQuery.of(scaffoldKey.currentContext);
+    //   final padding = mediaQuery.padding;
+    //   // final height = mediaQuery.size.height;
+    //   margin = EdgeInsets.only(
+    //       left: padding.left,
+    //       right: padding.right,
+    //       bottom: padding.top + padding.bottom + kToolbarHeight);
+    // }
     SnackBar show;
     if (snackBar != null) {
       show = snackBar;
