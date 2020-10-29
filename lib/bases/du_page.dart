@@ -59,6 +59,55 @@ abstract class DuPage extends BaseStatelessWidget
   Widget buildChild(BuildContext context);
 }
 
+/// 作为内部控件用的StatelessWidget
+abstract class DuPageInner extends BaseStatelessWidget
+    with _ShowSomething
+    implements Toast {
+  final GlobalKey<ScaffoldState> parentScaffoldKey;
+
+  DuPageInner({
+    Key key,
+    this.parentScaffoldKey,
+  }) : super(key: key);
+
+  @override
+  void toastSnackBar({
+    SnackBar snackBar,
+    Widget content,
+    String text,
+    Color backgroundColor,
+    double elevation,
+    EdgeInsetsGeometry margin,
+    EdgeInsetsGeometry padding,
+    double width,
+    ShapeBorder shape,
+    SnackBarBehavior behavior,
+    SnackBarAction action,
+    Duration duration,
+    Animation<double> animation,
+    VoidCallback onVisible,
+    String hideStr,
+  }) {
+    _showSnackBar(
+      scaffoldKey: parentScaffoldKey,
+      snackBar: snackBar,
+      content: content,
+      text: text,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      margin: margin,
+      padding: padding,
+      width: width,
+      shape: shape,
+      behavior: behavior,
+      action: action,
+      duration: duration,
+      animation: animation,
+      onVisible: onVisible,
+    );
+  }
+}
+
 /// 作为主要的state类继承于State
 abstract class DuState<T extends BaseStatefulWidget> extends State<T>
     with DuScaffoldMethod, _ShowSomething
@@ -110,6 +159,54 @@ abstract class DuState<T extends BaseStatefulWidget> extends State<T>
 
   /// build child
   Widget buildChild(BuildContext context);
+}
+
+/// 作为内部控件用的State
+abstract class DuStateInner<T extends BaseStatefulWidget> extends State<T>
+    with _ShowSomething
+    implements Toast {
+  final GlobalKey<ScaffoldState> parentScaffoldKey;
+
+  DuStateInner({
+    this.parentScaffoldKey,
+  });
+
+  @override
+  void toastSnackBar({
+    SnackBar snackBar,
+    Widget content,
+    String text,
+    Color backgroundColor,
+    double elevation,
+    EdgeInsetsGeometry margin,
+    EdgeInsetsGeometry padding,
+    double width,
+    ShapeBorder shape,
+    SnackBarBehavior behavior,
+    SnackBarAction action,
+    Duration duration,
+    Animation<double> animation,
+    VoidCallback onVisible,
+    String hideStr,
+  }) {
+    _showSnackBar(
+      scaffoldKey: parentScaffoldKey,
+      snackBar: snackBar,
+      content: content,
+      text: text,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      margin: margin,
+      padding: padding,
+      width: width,
+      shape: shape,
+      behavior: behavior,
+      action: action,
+      duration: duration,
+      animation: animation,
+      onVisible: onVisible,
+    );
+  }
 }
 
 ///作为默认主页样式
@@ -186,6 +283,7 @@ class _ShowSomething {
     VoidCallback onVisible,
     String hideStr,
   }) {
+    if (scaffoldKey == null) return; //如果`scaffoldKey`为null, 下面的代码没有任何意义.
     final SnackBarAction actionOrHide = action != null
         ? action
         : hideStr?.isNotEmpty == true
