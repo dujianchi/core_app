@@ -16,4 +16,5 @@ dependencies:
     core_app:
         git:
             url: https://github.com/dujianchi/core_app.git
+            ref: 'nullsafe' # or 'master'
 ```
