@@ -18,7 +18,6 @@ class DuScaffoldMethod {
   Widget bottomNavigationBar(BuildContext context) => null;
   Widget bottomSheet(BuildContext context) => null;
   Color backgroundColor(BuildContext context) => null;
-  bool resizeToAvoidBottomPadding(BuildContext context) => null;
   bool resizeToAvoidBottomInset(BuildContext context) => null;
   bool primary(BuildContext context) => true;
   DragStartBehavior drawerDragStartBehavior(BuildContext context) =>
@@ -50,7 +49,6 @@ class DuScaffoldMethod {
         bottomNavigationBar: this.bottomNavigationBar(context),
         bottomSheet: this.bottomSheet(context),
         backgroundColor: this.backgroundColor(context),
-        resizeToAvoidBottomPadding: this.resizeToAvoidBottomPadding(context),
         resizeToAvoidBottomInset: this.resizeToAvoidBottomInset(context),
         primary: this.primary(context),
         drawerDragStartBehavior: this.drawerDragStartBehavior(context),

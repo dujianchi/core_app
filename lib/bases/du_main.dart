@@ -18,7 +18,6 @@ class DuMain extends BaseMaterialApp {
   final Widget bottomNavigationBar;
   final Widget bottomSheet;
   final Color backgroundColor;
-  final bool resizeToAvoidBottomPadding;
   final bool resizeToAvoidBottomInset;
   final bool primary;
   final DragStartBehavior drawerDragStartBehavior;
@@ -42,7 +41,6 @@ class DuMain extends BaseMaterialApp {
     this.bottomNavigationBar,
     this.bottomSheet,
     this.backgroundColor,
-    this.resizeToAvoidBottomPadding,
     this.resizeToAvoidBottomInset,
     this.primary = true,
     this.drawerDragStartBehavior = DragStartBehavior.start,
@@ -95,7 +93,6 @@ class DuMain extends BaseMaterialApp {
               bottomNavigationBar: bottomNavigationBar,
               bottomSheet: bottomSheet,
               backgroundColor: backgroundColor,
-              resizeToAvoidBottomPadding: resizeToAvoidBottomPadding,
               resizeToAvoidBottomInset: resizeToAvoidBottomInset,
               primary: primary,
               drawerDragStartBehavior: drawerDragStartBehavior,
@@ -144,7 +141,6 @@ class DuMain extends BaseMaterialApp {
     Widget bottomNavigationBar,
     Widget bottomSheet,
     Color backgroundColor,
-    bool resizeToAvoidBottomPadding,
     bool resizeToAvoidBottomInset,
     bool primary,
     DragStartBehavior drawerDragStartBehavior,
@@ -167,7 +163,6 @@ class DuMain extends BaseMaterialApp {
       bottomNavigationBar: bottomNavigationBar,
       bottomSheet: bottomSheet,
       backgroundColor: backgroundColor,
-      resizeToAvoidBottomPadding: resizeToAvoidBottomPadding,
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       primary: primary,
       drawerDragStartBehavior: drawerDragStartBehavior,

@@ -18,8 +18,7 @@ class Texts {
 
   Texts initLanguageContext(BuildContext context) {
     if (context != null)
-      languageCode =
-          Localizations.localeOf(context, nullOk: true)?.languageCode;
+      languageCode = Localizations.localeOf(context)?.languageCode;
     if (languageCode == null) languageCode = support_language[0];
     return this;
   }
