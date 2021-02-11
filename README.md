@@ -11,7 +11,9 @@ For help on editing package code, view the [documentation](https://flutter.io/de
 [generate json](https://dujianchi.github.io/core_app/index.html)
 
 # useage
+```
 dependencies:
     core_app:
         git:
             url: https://github.com/dujianchi/core_app.git
+```
