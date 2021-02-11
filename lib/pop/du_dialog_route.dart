@@ -4,8 +4,8 @@ import 'package:flutter/widgets.dart';
 
 class DuDialogRoute<T> extends PopupRoute<T> {
   DuDialogRoute({
-    @required RoutePageBuilder pageBuilder,
-    RouteSettings settings,
+    required RoutePageBuilder pageBuilder,
+    RouteSettings? settings,
   })  : _pageBuilder = pageBuilder,
         super(settings: settings);
 
@@ -15,7 +15,7 @@ class DuDialogRoute<T> extends PopupRoute<T> {
   bool get barrierDismissible => true;
 
   @override
-  String get barrierLabel => null;
+  String? get barrierLabel => null;
 
   @override
   Color get barrierColor => const Color(0x01000000); //can't not be transparent

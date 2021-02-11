@@ -5,18 +5,18 @@ import 'package:core_app/core.dart';
 
 /// 带刷新和下拉的scrollview
 class DuScrollView extends BaseStatelessWidget {
-  final Widget child;
-  final Widget emptyView;
-  final RefreshCallback onRefresh;
-  final OnLoadmore onLoadmore;
+  final Widget? child;
+  final Widget? emptyView;
+  final RefreshCallback? onRefresh;
+  final OnLoadmore? onLoadmore;
   final ScrollController _controller = ScrollController();
   final loadmoreEnable;
   final refreshEnable;
   // scrollview的属性
   final Axis scrollDirection;
   final bool reverse;
-  final bool primary;
-  final EdgeInsetsGeometry padding;
+  final bool? primary;
+  final EdgeInsetsGeometry? padding;
 
   DuScrollView({
     this.child,
@@ -35,7 +35,7 @@ class DuScrollView extends BaseStatelessWidget {
     if (notification is ScrollEndNotification && loadmoreEnable == true) {
       if (_controller.position.maxScrollExtent > 0 &&
           _controller.position.maxScrollExtent == _controller.offset) {
-        onLoadmore();
+        onLoadmore!();
       }
     }
     return true;
@@ -56,14 +56,14 @@ class DuScrollView extends BaseStatelessWidget {
               ? InkWell(
                   child: emptyView,
                   onTap: () {
-                    onRefresh();
+                    onRefresh!();
                   })
               : emptyView,
     );
     if (onRefresh != null && refreshEnable) {
       widget = RefreshIndicator(
         child: widget,
-        onRefresh: onRefresh,
+        onRefresh: onRefresh!,
       );
     }
     if (onLoadmore != null) {

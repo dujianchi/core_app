@@ -3,32 +3,32 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 /// 在Main类界面初始化时的回调，用于做一些需要context的初始化操作
-typedef OnMainPageInit(BuildContext context);
+typedef OnMainPageInit(BuildContext? context);
 
 class DuMain extends BaseMaterialApp {
   final double designWidth;
-  final PreferredSizeWidget appBar;
-  final Widget body;
-  final Widget floatingActionButton;
-  final FloatingActionButtonLocation floatingActionButtonLocation;
-  final FloatingActionButtonAnimator floatingActionButtonAnimator;
-  final List<Widget> persistentFooterButtons;
-  final Widget drawer;
-  final Widget endDrawer;
-  final Widget bottomNavigationBar;
-  final Widget bottomSheet;
-  final Color backgroundColor;
-  final bool resizeToAvoidBottomInset;
+  final PreferredSizeWidget? appBar;
+  final Widget? body;
+  final Widget? floatingActionButton;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
+  final FloatingActionButtonAnimator? floatingActionButtonAnimator;
+  final List<Widget>? persistentFooterButtons;
+  final Widget? drawer;
+  final Widget? endDrawer;
+  final Widget? bottomNavigationBar;
+  final Widget? bottomSheet;
+  final Color? backgroundColor;
+  final bool? resizeToAvoidBottomInset;
   final bool primary;
   final DragStartBehavior drawerDragStartBehavior;
   final bool extendBody;
   final bool extendBodyBehindAppBar;
-  final Color drawerScrimColor;
-  final double drawerEdgeDragWidth;
+  final Color? drawerScrimColor;
+  final double? drawerEdgeDragWidth;
 
   DuMain({
     this.designWidth = Dimens.default_design_width,
-    OnMainPageInit onMainPageInit,
+    OnMainPageInit? onMainPageInit,
     //scallford
     this.appBar,
     this.body,
@@ -49,7 +49,7 @@ class DuMain extends BaseMaterialApp {
     this.drawerScrimColor,
     this.drawerEdgeDragWidth,
     // material app
-    Key key,
+    Key? key,
     navigatorKey,
     routes: const <String, WidgetBuilder>{},
     initialRoute,
@@ -126,30 +126,30 @@ class DuMain extends BaseMaterialApp {
         );
 
   static Widget _buildHome({
-    OnMainPageInit onMainPageInit,
-    bool initDimens,
-    BuildContext context,
-    double designWidth,
-    PreferredSizeWidget appBar,
-    Widget body,
-    Widget floatingActionButton,
-    FloatingActionButtonLocation floatingActionButtonLocation,
-    FloatingActionButtonAnimator floatingActionButtonAnimator,
-    List<Widget> persistentFooterButtons,
-    Widget drawer,
-    Widget endDrawer,
-    Widget bottomNavigationBar,
-    Widget bottomSheet,
-    Color backgroundColor,
-    bool resizeToAvoidBottomInset,
-    bool primary,
-    DragStartBehavior drawerDragStartBehavior,
-    bool extendBody,
-    bool extendBodyBehindAppBar,
-    Color drawerScrimColor,
-    double drawerEdgeDragWidth,
+    OnMainPageInit? onMainPageInit,
+    bool? initDimens,
+    BuildContext? context,
+    double? designWidth,
+    PreferredSizeWidget? appBar,
+    Widget? body,
+    Widget? floatingActionButton,
+    FloatingActionButtonLocation? floatingActionButtonLocation,
+    FloatingActionButtonAnimator? floatingActionButtonAnimator,
+    List<Widget>? persistentFooterButtons,
+    Widget? drawer,
+    Widget? endDrawer,
+    Widget? bottomNavigationBar,
+    Widget? bottomSheet,
+    Color? backgroundColor,
+    bool? resizeToAvoidBottomInset,
+    required bool primary,
+    required DragStartBehavior drawerDragStartBehavior,
+    required bool extendBody,
+    required bool extendBodyBehindAppBar,
+    Color? drawerScrimColor,
+    double? drawerEdgeDragWidth,
   }) {
-    if (initDimens == true) Dimens.init(context, designWidth);
+    if (initDimens == true) Dimens.init(context!, designWidth);
     if (onMainPageInit != null) onMainPageInit(context);
     return Scaffold(
       appBar: appBar,

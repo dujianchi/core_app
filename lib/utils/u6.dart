@@ -8,11 +8,11 @@ class App extends NavigatorObserver {
   App._internal();
   factory App() => _instance;
 
-  static final List<Route> _routes = List();
-  
+  static final List<Route?> _routes = [];
+
   static NavigatorObserver get instance => _instance;
-  static List<Route> get routes => _routes;
-  static NavigatorState get nav => _instance.navigator;
+  static List<Route?> get routes => _routes;
+  static NavigatorState? get nav => _instance.navigator;
 
   static bool closeTopDialog() {
     bool result = false;
@@ -24,7 +24,7 @@ class App extends NavigatorObserver {
           var entry = entrite?.first;
           if (entry?.opaque == false) {
             try {
-              nav.maybePop();
+              nav!.maybePop();
             } catch (e) {
               //print('$e');
             }
@@ -40,10 +40,10 @@ class App extends NavigatorObserver {
   static void exit() {
     bool isBottom = false;
     while (_routes.isNotEmpty && !isBottom) {
-      var route = _routes.last;
+      var route = _routes.last!;
       isBottom = route.isFirst;
       try {
-        nav.maybePop();
+        nav!.maybePop();
       } catch (e) {
         //print('$e');
       }
@@ -52,14 +52,14 @@ class App extends NavigatorObserver {
   }
 
   /// push
-  static Future<T> push<T extends Object>({
-    Route<T> route,
-    Widget next,
-    RouteSettings settings,
+  static Future<T?>? push<T extends Object>({
+    Route<T>? route,
+    Widget? next,
+    RouteSettings? settings,
     bool maintainState = true,
     bool fullscreenDialog = false,
   }) {
-    Route<T> need;
+    Route<T>? need;
     if (route != null) {
       need = route;
     } else if (next != null) {
@@ -70,19 +70,19 @@ class App extends NavigatorObserver {
         fullscreenDialog: fullscreenDialog,
       );
     }
-    return need != null ? nav.push(need) : null;
+    return need != null ? nav!.push(need) : null;
   }
 
   /// push
-  static Future<T> pushReplacement<T extends Object, TO extends Object>({
-    Route<T> route,
-    Widget next,
-    RouteSettings settings,
+  static Future<T?>? pushReplacement<T extends Object, TO extends Object>({
+    Route<T>? route,
+    Widget? next,
+    RouteSettings? settings,
     bool maintainState = true,
     bool fullscreenDialog = false,
-    TO result,
+    TO? result,
   }) {
-    Route<T> need;
+    Route<T>? need;
     if (route != null) {
       need = route;
     } else if (next != null) {
@@ -93,32 +93,32 @@ class App extends NavigatorObserver {
         fullscreenDialog: fullscreenDialog,
       );
     }
-    return need != null ? nav.pushReplacement(need, result: result) : null;
+    return need != null ? nav!.pushReplacement(need, result: result) : null;
   }
 
   @override
-  void didPop(Route route, Route previousRoute) {
+  void didPop(Route route, Route? previousRoute) {
     //print('didPop start -> route.length = ${_routes.length}');
     _routes.remove(route);
     //print('didPop done  -> route.length = ${_routes.length}');
   }
 
   @override
-  void didPush(Route route, Route previousRoute) {
+  void didPush(Route route, Route? previousRoute) {
     //print('didPush start -> route.length = ${_routes.length}');
     _routes.add(route);
     //print('didPush done  -> route.length = ${_routes.length}');
   }
 
   @override
-  void didRemove(Route route, Route previousRoute) {
+  void didRemove(Route route, Route? previousRoute) {
     //print('didRemove start -> route.length = ${_routes.length}');
     _routes.remove(route);
     //print('didRemove done  -> route.length = ${_routes.length}');
   }
 
   @override
-  void didReplace({Route newRoute, Route oldRoute}) {
+  void didReplace({Route? newRoute, Route? oldRoute}) {
     //print('didReplace start -> route.length = ${_routes.length}');
     final start = _routes.indexOf(oldRoute);
     if (start >= 0) {

@@ -5,21 +5,21 @@ import 'package:core_app/core.dart';
 
 /// 带刷新和下拉的gridview
 class DuGridView extends BaseStatelessWidget {
-  final int itemCount;
-  final IndexedWidgetBuilder itemBuilder;
-  final List<Widget> children;
-  final RefreshCallback onRefresh;
-  final OnLoadmore onLoadmore;
+  final int? itemCount;
+  final IndexedWidgetBuilder? itemBuilder;
+  final List<Widget>? children;
+  final RefreshCallback? onRefresh;
+  final OnLoadmore? onLoadmore;
   final ScrollController _controller = ScrollController();
   final loadmoreEnable;
   final refreshEnable;
-  final Widget emptyView;
+  final Widget? emptyView;
   // gridview的属性
   final Axis scrollDirection;
   final bool reverse;
-  final bool primary;
+  final bool? primary;
   final bool shrinkWrap;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
   final bool addAutomaticKeepAlives;
   final bool addRepaintBoundaries;
   final SliverGridDelegate gridDelegate;
@@ -40,7 +40,7 @@ class DuGridView extends BaseStatelessWidget {
     this.padding,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
-    @required this.gridDelegate,
+    required this.gridDelegate,
   }) {
     assert(children != null || (itemCount != null && itemBuilder != null));
     assert(gridDelegate != null);
@@ -50,7 +50,7 @@ class DuGridView extends BaseStatelessWidget {
     if (notification is ScrollEndNotification && loadmoreEnable == true) {
       if (_controller.position.maxScrollExtent > 0 &&
           _controller.position.maxScrollExtent == _controller.offset) {
-        onLoadmore();
+        onLoadmore!();
       }
     }
     return true;
@@ -58,7 +58,7 @@ class DuGridView extends BaseStatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget child;
+    Widget? child;
     if (children != null) {
       child = GridView(
         scrollDirection: scrollDirection,
@@ -71,9 +71,9 @@ class DuGridView extends BaseStatelessWidget {
         gridDelegate: gridDelegate,
         physics: const AlwaysScrollableScrollPhysics(),
         controller: _controller,
-        children: children,
+        children: children!,
       );
-    } else if (itemCount != null && itemCount > 0 || emptyView == null) {
+    } else if (itemCount != null && itemCount! > 0 || emptyView == null) {
       child = GridView.builder(
         scrollDirection: scrollDirection,
         reverse: reverse,
@@ -86,29 +86,29 @@ class DuGridView extends BaseStatelessWidget {
         physics: const AlwaysScrollableScrollPhysics(),
         controller: _controller,
         itemCount: itemCount,
-        itemBuilder: itemBuilder,
+        itemBuilder: itemBuilder!,
       );
     } else {
       child = onRefresh != null
           ? InkWell(
               child: emptyView,
               onTap: () {
-                onRefresh();
+                onRefresh!();
               })
           : emptyView;
     }
     if (onRefresh != null && refreshEnable) {
       child = RefreshIndicator(
-        child: child,
-        onRefresh: onRefresh,
+        child: child!,
+        onRefresh: onRefresh!,
       );
     }
     if (onLoadmore != null) {
       child = NotificationListener(
-        child: child,
+        child: child!,
         onNotification: _onNotification,
       );
     }
-    return child;
+    return child!;
   }
 }

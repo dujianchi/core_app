@@ -19,10 +19,10 @@ class Dimens {
     _instance._padding = MediaQuery.of(context).padding;
   }
 
-  static set designWidth(double designWidth) =>
+  static set designWidth(double? designWidth) =>
       _instance._designWidth = designWidth ?? default_design_width;
 
-  static void init(BuildContext context, double designWidth) {
+  static void init(BuildContext context, double? designWidth) {
     Dimens.screenSize = context;
     Dimens.designWidth = designWidth;
   }

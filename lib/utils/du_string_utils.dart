@@ -1,13 +1,13 @@
 extension DuStringUtils on String {
   /// to num
-  num toNum([num def]) =>
+  num? toNum([num? def]) =>
       this?.isNotEmpty == true ? num.tryParse(this) ?? def : def;
 
   /// to int
-  int toInt([int def]) => toNum(def)?.round() ?? def;
+  int? toInt([int? def]) => toNum(def)?.round() ?? def;
 
   /// to double
-  double toDouble([double def]) => toNum(def)?.toDouble() ?? def;
+  double? toDouble([double? def]) => toNum(def)?.toDouble() ?? def;
 
   /// to bool
   bool toBool() =>
@@ -15,5 +15,5 @@ extension DuStringUtils on String {
       '1' == this ||
       (this?.isNotEmpty == true &&
           ('true' == this.toLowerCase() || 'yes' == this.toLowerCase())) ||
-      toInt(-1) >= 1;
+      toInt(-1)! >= 1;
 }

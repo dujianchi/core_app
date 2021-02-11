@@ -10,7 +10,7 @@ import 'package:flutter/widgets.dart';
 
 class _ToolbarContainerLayout extends SingleChildLayoutDelegate {
   /// 自定义高度，会覆盖默认高度
-  final double overrideHeight;
+  final double? overrideHeight;
 
   _ToolbarContainerLayout(this.overrideHeight);
 
@@ -35,7 +35,7 @@ class _ToolbarContainerLayout extends SingleChildLayoutDelegate {
 
 class OverrideAppBar extends StatefulWidget implements PreferredSizeWidget {
   OverrideAppBar({
-    Key key,
+    Key? key,
     this.leading,
     this.automaticallyImplyLeading = true,
     this.title,
@@ -65,35 +65,35 @@ class OverrideAppBar extends StatefulWidget implements PreferredSizeWidget {
             (bottom?.preferredSize?.height ?? 0.0)),
         super(key: key);
 
-  final Widget leading;
+  final Widget? leading;
 
   final bool automaticallyImplyLeading;
 
-  final Widget title;
+  final Widget? title;
 
-  final List<Widget> actions;
+  final List<Widget>? actions;
 
-  final Widget flexibleSpace;
+  final Widget? flexibleSpace;
 
-  final PreferredSizeWidget bottom;
+  final PreferredSizeWidget? bottom;
 
-  final double elevation;
+  final double? elevation;
 
-  final ShapeBorder shape;
+  final ShapeBorder? shape;
 
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
-  final Brightness brightness;
+  final Brightness? brightness;
 
-  final IconThemeData iconTheme;
+  final IconThemeData? iconTheme;
 
-  final IconThemeData actionsIconTheme;
+  final IconThemeData? actionsIconTheme;
 
-  final TextTheme textTheme;
+  final TextTheme? textTheme;
 
   final bool primary;
 
-  final bool centerTitle;
+  final bool? centerTitle;
 
   final double titleSpacing;
 
@@ -102,12 +102,12 @@ class OverrideAppBar extends StatefulWidget implements PreferredSizeWidget {
   final double bottomOpacity;
 
   /// 自定义高度，会覆盖默认高度
-  final double overrideHeight;
+  final double? overrideHeight;
 
   @override
   final Size preferredSize;
 
-  bool _getEffectiveCenterTitle(ThemeData theme) {
+  bool? _getEffectiveCenterTitle(ThemeData theme) {
     if (centerTitle != null) return centerTitle;
     assert(theme.platform != null);
     switch (theme.platform) {
@@ -116,7 +116,7 @@ class OverrideAppBar extends StatefulWidget implements PreferredSizeWidget {
         return false;
       case TargetPlatform.iOS:
       case TargetPlatform.macOS:
-        return actions == null || actions.length < 2;
+        return actions == null || actions!.length < 2;
       case TargetPlatform.linux:
       case TargetPlatform.windows:
         return false;
@@ -146,7 +146,7 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
     final ThemeData theme = Theme.of(context);
     final AppBarTheme appBarTheme = AppBarTheme.of(context);
     final ScaffoldState scaffold = Scaffold.of(context);
-    final ModalRoute<dynamic> parentRoute = ModalRoute.of(context);
+    final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
 
     final bool hasDrawer = scaffold?.hasDrawer ?? false;
     final bool hasEndDrawer = scaffold?.hasEndDrawer ?? false;
@@ -159,30 +159,30 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
     IconThemeData actionsIconTheme = widget.actionsIconTheme ??
         appBarTheme.actionsIconTheme ??
         overallIconTheme;
-    TextStyle centerStyle = widget.textTheme?.title ??
-        appBarTheme.textTheme?.title ??
-        theme.primaryTextTheme.title;
-    TextStyle sideStyle = widget.textTheme?.body1 ??
-        appBarTheme.textTheme?.body1 ??
-        theme.primaryTextTheme.body1;
+    TextStyle? centerStyle = widget.textTheme?.headline6 ??
+        appBarTheme.textTheme?.headline6 ??
+        theme.primaryTextTheme.headline6;
+    TextStyle? sideStyle = widget.textTheme?.bodyText2 ??
+        appBarTheme.textTheme?.bodyText2 ??
+        theme.primaryTextTheme.bodyText2;
 
     if (widget.toolbarOpacity != 1.0) {
       final double opacity =
           const Interval(0.25, 1.0, curve: Curves.fastOutSlowIn)
               .transform(widget.toolbarOpacity);
       if (centerStyle?.color != null)
-        centerStyle =
-            centerStyle.copyWith(color: centerStyle.color.withOpacity(opacity));
+        centerStyle = centerStyle!
+            .copyWith(color: centerStyle.color!.withOpacity(opacity));
       if (sideStyle?.color != null)
         sideStyle =
-            sideStyle.copyWith(color: sideStyle.color.withOpacity(opacity));
+            sideStyle!.copyWith(color: sideStyle.color!.withOpacity(opacity));
       overallIconTheme = overallIconTheme.copyWith(
           opacity: opacity * (overallIconTheme.opacity ?? 1.0));
       actionsIconTheme = actionsIconTheme.copyWith(
           opacity: opacity * (actionsIconTheme.opacity ?? 1.0));
     }
 
-    Widget leading = widget.leading;
+    Widget? leading = widget.leading;
     if (leading == null && widget.automaticallyImplyLeading) {
       if (hasDrawer) {
         leading = IconButton(
@@ -203,9 +203,9 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
       );
     }
 
-    Widget title = widget.title;
+    Widget? title = widget.title;
     if (title != null) {
-      bool namesRoute;
+      bool? namesRoute;
       switch (theme.platform) {
         case TargetPlatform.android:
         case TargetPlatform.fuchsia:
@@ -218,7 +218,7 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
           break;
       }
       title = DefaultTextStyle(
-        style: centerStyle,
+        style: centerStyle!,
         softWrap: false,
         overflow: TextOverflow.ellipsis,
         child: Semantics(
@@ -229,12 +229,12 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
       );
     }
 
-    Widget actions;
-    if (widget.actions != null && widget.actions.isNotEmpty) {
+    Widget? actions;
+    if (widget.actions != null && widget.actions!.isNotEmpty) {
       actions = Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: widget.actions,
+        children: widget.actions!,
       );
     } else if (hasEndDrawer) {
       actions = IconButton(
@@ -255,7 +255,7 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
       leading: leading,
       middle: title,
       trailing: actions,
-      centerMiddle: widget._getEffectiveCenterTitle(theme),
+      centerMiddle: widget._getEffectiveCenterTitle(theme)!,
       middleSpacing: widget.titleSpacing,
     );
 
@@ -265,7 +265,7 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
         child: IconTheme.merge(
           data: overallIconTheme,
           child: DefaultTextStyle(
-            style: sideStyle,
+            style: sideStyle!,
             child: toolbar,
           ),
         ),
@@ -274,7 +274,7 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
     if (widget.bottom != null) {
       appBar = Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
+        children: (<Widget?>[
           Flexible(
             child: ConstrainedBox(
               constraints: BoxConstraints(
@@ -290,7 +290,7 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
                           .transform(widget.bottomOpacity),
                   child: widget.bottom,
                 ),
-        ],
+        ]) as List<Widget>,
       );
     }
 
@@ -309,10 +309,10 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
     if (widget.flexibleSpace != null) {
       appBar = Stack(
         fit: StackFit.passthrough,
-        children: <Widget>[
+        children: (<Widget?>[
           widget.flexibleSpace,
           appBar,
-        ],
+        ]) as List<Widget>,
       );
     }
     final Brightness brightness = widget.brightness ??
@@ -338,7 +338,7 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
                 ? appBar
                 : SizedBox(
                     child: appBar,
-                    height: widget.overrideHeight +
+                    height: widget.overrideHeight! +
                         (widget.bottom?.preferredSize?.height ?? 0.0),
                   ),
           ),
@@ -349,35 +349,35 @@ class _OverrideAppBarState extends State<OverrideAppBar> {
 }
 
 class _FloatingAppBar extends StatefulWidget {
-  const _FloatingAppBar({Key key, this.child}) : super(key: key);
+  const _FloatingAppBar({Key? key, this.child}) : super(key: key);
 
-  final Widget child;
+  final Widget? child;
 
   @override
   _FloatingAppBarState createState() => _FloatingAppBarState();
 }
 
 class _FloatingAppBarState extends State<_FloatingAppBar> {
-  ScrollPosition _position;
+  ScrollPosition? _position;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_position != null)
-      _position.isScrollingNotifier.removeListener(_isScrollingListener);
+      _position!.isScrollingNotifier.removeListener(_isScrollingListener);
     _position = Scrollable.of(context)?.position;
     if (_position != null)
-      _position.isScrollingNotifier.addListener(_isScrollingListener);
+      _position!.isScrollingNotifier.addListener(_isScrollingListener);
   }
 
   @override
   void dispose() {
     if (_position != null)
-      _position.isScrollingNotifier.removeListener(_isScrollingListener);
+      _position!.isScrollingNotifier.removeListener(_isScrollingListener);
     super.dispose();
   }
 
-  RenderSliverFloatingPersistentHeader _headerRenderer() {
+  RenderSliverFloatingPersistentHeader? _headerRenderer() {
     return context
         .findAncestorRenderObjectOfType<RenderSliverFloatingPersistentHeader>();
   }
@@ -385,71 +385,71 @@ class _FloatingAppBarState extends State<_FloatingAppBar> {
   void _isScrollingListener() {
     if (_position == null) return;
 
-    final RenderSliverFloatingPersistentHeader header = _headerRenderer();
-    if (_position.isScrollingNotifier.value)
-      header?.maybeStopSnapAnimation(_position.userScrollDirection);
+    final RenderSliverFloatingPersistentHeader? header = _headerRenderer();
+    if (_position!.isScrollingNotifier.value)
+      header?.maybeStopSnapAnimation(_position!.userScrollDirection);
     else
-      header?.maybeStartSnapAnimation(_position.userScrollDirection);
+      header?.maybeStartSnapAnimation(_position!.userScrollDirection);
   }
 
   @override
-  Widget build(BuildContext context) => widget.child;
+  Widget build(BuildContext context) => widget.child!;
 }
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   _SliverAppBarDelegate({
-    @required this.leading,
-    @required this.automaticallyImplyLeading,
-    @required this.title,
-    @required this.actions,
-    @required this.flexibleSpace,
-    @required this.bottom,
-    @required this.elevation,
-    @required this.forceElevated,
-    @required this.backgroundColor,
-    @required this.brightness,
-    @required this.iconTheme,
-    @required this.actionsIconTheme,
-    @required this.textTheme,
-    @required this.primary,
-    @required this.centerTitle,
-    @required this.titleSpacing,
-    @required this.expandedHeight,
-    @required this.collapsedHeight,
-    @required this.topPadding,
-    @required this.floating,
-    @required this.pinned,
-    @required this.snapConfiguration,
-    @required this.shape,
-    @required this.overrideHeight,
-  })  : assert(primary || topPadding == 0.0),
+    required this.leading,
+    required this.automaticallyImplyLeading,
+    required this.title,
+    required this.actions,
+    required this.flexibleSpace,
+    required this.bottom,
+    required this.elevation,
+    required this.forceElevated,
+    required this.backgroundColor,
+    required this.brightness,
+    required this.iconTheme,
+    required this.actionsIconTheme,
+    required this.textTheme,
+    required this.primary,
+    required this.centerTitle,
+    required this.titleSpacing,
+    required this.expandedHeight,
+    required this.collapsedHeight,
+    required this.topPadding,
+    required this.floating,
+    required this.pinned,
+    required this.snapConfiguration,
+    required this.shape,
+    required this.overrideHeight,
+  })   : assert(primary || topPadding == 0.0),
         _bottomHeight = bottom?.preferredSize?.height ?? 0.0;
 
-  final Widget leading;
+  final Widget? leading;
   final bool automaticallyImplyLeading;
-  final Widget title;
-  final List<Widget> actions;
-  final Widget flexibleSpace;
-  final PreferredSizeWidget bottom;
-  final double elevation;
+  final Widget? title;
+  final List<Widget>? actions;
+  final Widget? flexibleSpace;
+  final PreferredSizeWidget? bottom;
+  final double? elevation;
   final bool forceElevated;
-  final Color backgroundColor;
-  final Brightness brightness;
-  final IconThemeData iconTheme;
-  final IconThemeData actionsIconTheme;
-  final TextTheme textTheme;
+  final Color? backgroundColor;
+  final Brightness? brightness;
+  final IconThemeData? iconTheme;
+  final IconThemeData? actionsIconTheme;
+  final TextTheme? textTheme;
   final bool primary;
-  final bool centerTitle;
+  final bool? centerTitle;
   final double titleSpacing;
-  final double expandedHeight;
-  final double collapsedHeight;
+  final double? expandedHeight;
+  final double? collapsedHeight;
   final double topPadding;
   final bool floating;
   final bool pinned;
-  final ShapeBorder shape;
+  final ShapeBorder? shape;
 
   /// 自定义高度，会覆盖默认高度
-  final double overrideHeight;
+  final double? overrideHeight;
 
   final double _bottomHeight;
 
@@ -466,7 +466,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
       minExtent);
 
   @override
-  final FloatingHeaderSnapConfiguration snapConfiguration;
+  final FloatingHeaderSnapConfiguration? snapConfiguration;
 
   @override
   Widget build(
@@ -548,7 +548,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
 class OverrideSliverAppBar extends StatefulWidget {
   const OverrideSliverAppBar({
-    Key key,
+    Key? key,
     this.leading,
     this.automaticallyImplyLeading = true,
     this.title,
@@ -582,48 +582,48 @@ class OverrideSliverAppBar extends StatefulWidget {
             'The "snap" argument only makes sense for floating app bars.'),
         super(key: key);
 
-  final Widget leading;
+  final Widget? leading;
 
   final bool automaticallyImplyLeading;
 
-  final Widget title;
+  final Widget? title;
 
-  final List<Widget> actions;
+  final List<Widget>? actions;
 
-  final Widget flexibleSpace;
+  final Widget? flexibleSpace;
 
-  final PreferredSizeWidget bottom;
+  final PreferredSizeWidget? bottom;
 
-  final double elevation;
+  final double? elevation;
 
   final bool forceElevated;
 
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
-  final Brightness brightness;
+  final Brightness? brightness;
 
-  final IconThemeData iconTheme;
+  final IconThemeData? iconTheme;
 
-  final IconThemeData actionsIconTheme;
+  final IconThemeData? actionsIconTheme;
 
-  final TextTheme textTheme;
+  final TextTheme? textTheme;
 
   final bool primary;
 
-  final bool centerTitle;
+  final bool? centerTitle;
 
   final double titleSpacing;
 
-  final double expandedHeight;
+  final double? expandedHeight;
 
   final bool floating;
 
   final bool pinned;
 
-  final ShapeBorder shape;
+  final ShapeBorder? shape;
 
   /// 自定义高度，会覆盖默认高度
-  final double overrideHeight;
+  final double? overrideHeight;
 
   final bool snap;
 
@@ -633,7 +633,7 @@ class OverrideSliverAppBar extends StatefulWidget {
 
 class _OverrideSliverAppBarState extends State<OverrideSliverAppBar>
     with TickerProviderStateMixin {
-  FloatingHeaderSnapConfiguration _snapConfiguration;
+  FloatingHeaderSnapConfiguration? _snapConfiguration;
 
   void _updateSnapConfiguration() {
     if (widget.snap && widget.floating) {
@@ -665,9 +665,9 @@ class _OverrideSliverAppBarState extends State<OverrideSliverAppBar>
     assert(!widget.primary || debugCheckHasMediaQuery(context));
     final double topPadding =
         widget.primary ? MediaQuery.of(context).padding.top : 0.0;
-    final double collapsedHeight =
+    final double? collapsedHeight =
         (widget.pinned && widget.floating && widget.bottom != null)
-            ? widget.bottom.preferredSize.height + topPadding
+            ? widget.bottom!.preferredSize.height + topPadding
             : null;
 
     return MediaQuery.removePadding(

@@ -13,7 +13,7 @@ class BaseMaterialApp extends MaterialApp {
   ];
 
   BaseMaterialApp({
-    Key key,
+    Key? key,
     navigatorKey,
     home,
     routes: const <String, WidgetBuilder>{},
@@ -67,10 +67,10 @@ class BaseMaterialApp extends MaterialApp {
 
 /// base StatefulWidget
 abstract class BaseStatefulWidget extends StatefulWidget with I18n {
-  const BaseStatefulWidget({Key key}) : super(key: key);
+  const BaseStatefulWidget({Key? key}) : super(key: key);
 }
 
 /// base StatelessWidget
 abstract class BaseStatelessWidget extends StatelessWidget with I18n {
-  const BaseStatelessWidget({Key key}) : super(key: key);
+  const BaseStatelessWidget({Key? key}) : super(key: key);
 }
